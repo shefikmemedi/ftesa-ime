@@ -4,16 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kanagjegji i Vlerës</title>
+<meta name="description" content="Ju ftojmë me dashuri të jeni pjesë e kanagjegjit të Vlerës — një natë tradite, muzike dhe magjie.">
+<meta property="og:title" content="Kanagjegji i Vlerës">
+<meta property="og:description" content="20 Gusht 2027 · Ora 18:00 · Grand Resort — Ju presim me dashuri!">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#31040D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%2331040D' stroke='%23D4AF37' stroke-width='6'/%3E%3Ctext x='50' y='64' font-size='48' text-anchor='middle' fill='%23D4AF37'%3E%E2%99%A5%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ruby: #3A0510; /* E kuqe e thellë luksoze */
-    --ruby-light: #660B1E;
+    --ruby: #31040D; /* Ruby ekstrem i errët dhe luksoz */
+    --ruby-light: #590919;
     --gold: #D4AF37;
-    --gold-glow: rgba(212, 175, 55, 0.6);
+    --gold-light: #F9E596;
+    --gold-glow: rgba(212, 175, 55, 0.5);
     --white: #FFFFFF;
-    --glass: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(212, 175, 55, 0.25);
   }
   
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -21,7 +29,8 @@
   
   body {
     background-color: var(--ruby);
-    background-image: radial-gradient(circle at top, var(--ruby-light) 0%, var(--ruby) 80%);
+    background-image: radial-gradient(circle at top center, var(--ruby-light) 0%, var(--ruby) 100%),
+                      url('https://www.transparenttextures.com/patterns/stardust.png');
     color: var(--white);
     font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
@@ -30,17 +39,18 @@
   body.locked { overflow: hidden; height: 100vh; }
 
   /* =========================================
-     HYRJA MAGJIKE (VELVET & GOLD RIPPLE)
+     HYRJA (PULSIMI DHE VALA E FLORIRIT)
   ========================================= */
   #intro-screen {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: var(--ruby);
-    background-image: radial-gradient(circle, var(--ruby-light) 0%, var(--ruby) 100%);
+    background-image: radial-gradient(circle, var(--ruby-light) 0%, var(--ruby) 100%),
+                      url('https://www.transparenttextures.com/patterns/stardust.png');
     z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
   }
   
   .magical-btn {
-    position: relative; width: 90px; height: 90px;
+    position: relative; width: 100px; height: 100px;
     border-radius: 50%; background: transparent;
     border: 2px solid var(--gold);
     display: flex; justify-content: center; align-items: center;
@@ -48,138 +58,203 @@
     animation: heartbeat 2s infinite;
   }
   .magical-btn::before {
-    content: ''; position: absolute; width: 50px; height: 50px;
+    content: ''; position: absolute; width: 60px; height: 60px;
     background: var(--gold); border-radius: 50%;
-    box-shadow: 0 0 30px var(--gold);
+    box-shadow: 0 0 40px var(--gold);
   }
   .intro-text {
-    margin-top: 40px; font-family: 'Cinzel', serif; font-size: 13px;
+    margin-top: 50px; font-family: 'Cinzel', serif; font-size: 14px;
     letter-spacing: 6px; color: var(--gold); text-transform: uppercase;
-    animation: fadePulse 2s infinite;
+    animation: fadePulse 2s infinite; text-shadow: 0 0 10px rgba(212,175,55,0.5);
   }
 
-  /* Efekti i valës së floririt që pushton ekranin */
   .gold-ripple {
     position: fixed; top: 50%; left: 50%; width: 10px; height: 10px;
-    background: var(--gold); border-radius: 50%; transform: translate(-50%, -50%) scale(0);
-    z-index: 10000; pointer-events: none; transition: transform 1s ease-in-out, opacity 1s ease;
+    background: var(--gold-light); border-radius: 50%; transform: translate(-50%, -50%) scale(0);
+    z-index: 10000; pointer-events: none; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
   }
 
   @keyframes heartbeat {
     0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--gold-glow); }
-    50% { transform: scale(1.15); box-shadow: 0 0 50px var(--gold-glow); }
+    50% { transform: scale(1.1); box-shadow: 0 0 50px var(--gold-glow); }
   }
   @keyframes fadePulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
   /* =========================================
-     PETALET E TRËNDAFILIT NË RRËNIE
+     PETALET 3D NË RRËNIE
   ========================================= */
   .petal {
     position: fixed; top: -10%; z-index: 1;
-    width: 25px; height: 25px; background: #990F26;
+    width: 25px; height: 25px; background: #8B0A1D;
     border-radius: 15px 0 15px 0;
-    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
-    opacity: 0; animation: fall linear infinite;
-    pointer-events: none;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4);
+    opacity: 0; animation: fall linear infinite; pointer-events: none;
   }
   @keyframes fall {
     0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.5); }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
-    100% { opacity: 0; transform: translateY(110vh) rotate(360deg) scale(1); }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { opacity: 0; transform: translateY(110vh) rotate(360deg) scale(1.2); }
   }
 
   /* =========================================
-     TRUPI I FTESËS (GLASS & GOLD)
+     TRUPI I FTESËS (EKSKLUZIVITETI I QELQIT)
   ========================================= */
   #main-content {
     opacity: 0; visibility: hidden; transition: opacity 1.5s ease;
-    padding: 60px 20px; display: flex; flex-direction: column; align-items: center;
+    padding: 0 20px 100px 20px; display: flex; flex-direction: column; align-items: center;
     position: relative; z-index: 5;
   }
   #main-content.show { opacity: 1; visibility: visible; }
 
-  .glass-card {
-    background: var(--glass);
+  /* Klasa e përbashkët e kartave të qelqit */
+  .glass-panel {
+    background: var(--glass-bg);
     backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 15px; padding: 60px 30px;
-    max-width: 550px; width: 100%; text-align: center;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-    position: relative; overflow: hidden;
-  }
-  .glass-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px; padding: 60px 30px;
+    max-width: 650px; width: 100%; text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(212,175,55,0.05);
+    margin-top: 50px; position: relative; overflow: hidden;
   }
 
-  /* Animacionet kaskadë (Zbulimi) */
-  .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+  /* Animacioni në Scroll (Për çdo element) */
+  .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .reveal.active { opacity: 1; transform: translateY(0); }
 
+  /* Seksioni 1: Hyrja */
   .eyebrow {
-    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 5px;
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 8px;
     color: var(--gold); text-transform: uppercase; margin-bottom: 20px;
   }
   .name {
-    font-family: 'Great Vibes', cursive; font-size: clamp(80px, 16vw, 120px);
+    font-family: 'Great Vibes', cursive; font-size: clamp(80px, 16vw, 130px);
     color: var(--white); margin: 10px 0 30px 0; line-height: 1;
-    text-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 30px rgba(212, 175, 55, 0.4);
+    text-shadow: 0 5px 20px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.3);
   }
-  .story-text {
-    font-family: 'Playfair Display', serif; font-size: 18px; font-style: italic; line-height: 1.6;
+  .quote {
+    font-family: 'Playfair Display', serif; font-size: 19px; font-style: italic; line-height: 1.7;
     color: rgba(255,255,255,0.9); margin-bottom: 30px;
   }
   .divider {
-    width: 80px; height: 1px; background: var(--gold);
-    margin: 0 auto 30px auto; opacity: 0.6;
+    width: 100px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 40px auto; opacity: 0.8;
   }
 
-  /* Kalendari Miniaturë */
+  /* Seksioni 2: Galeria */
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 28px; color: var(--gold);
+    margin-bottom: 30px; letter-spacing: 4px; text-transform: uppercase;
+  }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
+  }
+  .gallery-item {
+    width: 100%; height: 220px; border-radius: 12px;
+    background-size: cover; background-position: center;
+    border: 1px solid var(--glass-border); transition: 0.5s;
+  }
+  .gallery-item:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(212,175,55,0.3); z-index: 2;}
+  
+  /* Seksioni 3: Programi & Tradita */
+  .timeline {
+    position: relative; border-left: 1px solid var(--gold);
+    margin-left: 20px; padding-left: 30px; text-align: left; margin-top: 30px;
+  }
+  .timeline-item { margin-bottom: 45px; position: relative; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -36px; top: 0; width: 12px; height: 12px;
+    background: var(--ruby); border: 2px solid var(--gold); border-radius: 50%;
+    box-shadow: 0 0 10px var(--gold);
+  }
+  .t-time { font-family: 'Cinzel', serif; color: var(--gold); font-weight: 700; font-size: 20px; margin-bottom: 8px;}
+  .t-title { font-size: 20px; color: var(--white); margin-bottom: 8px; font-family: 'Playfair Display', serif;}
+  .t-desc { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 300; line-height: 1.5;}
+
+  /* Seksioni 4: Detajet & Numëruesi */
   .date-highlight {
-    font-family: 'Cinzel', serif; font-size: 26px; color: var(--gold);
-    letter-spacing: 3px; margin-bottom: 5px; font-weight: 600;
+    font-family: 'Cinzel', serif; font-size: 32px; color: var(--gold-light);
+    letter-spacing: 4px; margin-bottom: 10px; font-weight: 600;
   }
   .time-loc {
-    font-size: 13px; letter-spacing: 2px; color: var(--white);
-    text-transform: uppercase; margin-bottom: 40px; font-weight: 300;
+    font-size: 14px; letter-spacing: 3px; color: var(--white);
+    text-transform: uppercase; margin-bottom: 40px; font-weight: 400;
   }
-
-  /* Countdown Luksoz */
-  .countdown { display: flex; justify-content: center; gap: 15px; margin-top: 40px; }
+  .countdown { display: flex; justify-content: center; gap: 20px; margin-top: 40px; }
   .cd-box {
-    background: rgba(0,0,0,0.3); border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 8px; width: 70px; padding: 15px 0;
+    background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 12px; width: 80px; padding: 20px 0;
+    box-shadow: inset 0 0 15px rgba(255,255,255,0.05);
   }
-  .cd-num { font-family: 'Cinzel', serif; font-size: 24px; color: var(--gold); display: block;}
-  .cd-label { font-size: 9px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; margin-top: 5px; display: block;}
+  .cd-num { font-family: 'Cinzel', serif; font-size: 28px; color: var(--gold); display: block;}
+  .cd-label { font-size: 10px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; margin-top: 8px; display: block;}
+  .map-btn {
+    display: inline-block; padding: 15px 40px; border-radius: 30px; margin-top: 40px;
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif;
+    font-size: 12px; letter-spacing: 4px; transition: 0.4s; text-transform: uppercase;
+  }
+  .map-btn:hover { background: var(--gold); color: var(--ruby); box-shadow: 0 0 20px var(--gold-glow); }
 
-  /* Formulari i Konfirmimit */
-  .rsvp-container { margin-top: 50px; text-align: left; border-top: 1px dashed rgba(212,175,55,0.3); padding-top: 40px;}
-  .rsvp-title { font-family: 'Cinzel', serif; font-size: 20px; color: var(--gold); text-align: center; margin-bottom: 25px; }
+  /* Seksioni 5: Konfirmimi (RSVP) */
+  .rsvp-container { text-align: left; }
   .input-field {
-    width: 100%; padding: 15px; border-radius: 5px; margin-bottom: 15px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.3);
-    color: var(--white); font-family: 'Montserrat', sans-serif;
+    width: 100%; padding: 18px; border-radius: 8px; margin-bottom: 20px;
+    background: rgba(0,0,0,0.2); border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 15px;
+    transition: 0.3s;
   }
+  .input-field:focus { outline: none; border-color: var(--gold-light); background: rgba(0,0,0,0.4); }
   .btn-submit {
-    width: 100%; padding: 15px; background: var(--gold); border: none;
-    color: var(--ruby); font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600;
-    letter-spacing: 2px; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+    width: 100%; padding: 18px; background: var(--gold); border: none; border-radius: 8px;
+    color: var(--ruby); font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700;
+    letter-spacing: 3px; cursor: pointer; transition: 0.4s; text-transform: uppercase;
   }
-  .btn-submit:hover { background: var(--white); box-shadow: 0 0 20px var(--gold-glow); }
+  .btn-submit:hover { background: var(--gold-light); box-shadow: 0 0 25px var(--gold-glow); transform: translateY(-2px);}
 
   /* Butoni i Muzikës që rrotullohet si disk */
   #music-toggle{
-    position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; border-radius: 50%;
-    background: var(--ruby); border: 2px solid var(--gold); color: var(--gold); font-size: 22px; 
+    position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%;
+    background: var(--ruby); border: 2px solid var(--gold); color: var(--gold); font-size: 24px; 
     cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.8);
   }
   .spin { animation: spinRecord 4s linear infinite; }
   @keyframes spinRecord { 100% { transform: rotate(360deg); } }
+  
+  @media(max-width: 600px) {
+    .glass-panel { padding: 40px 20px; }
+    .cd-box { width: 65px; padding: 15px 0; }
+    .cd-num { font-size: 22px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
 
+  /* Rrëshqitësi i personalizuar (shfaqet mirë edhe në incizim) */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--ruby); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+  /* Fokusi i dukshëm për tastierë (aksesueshmëri) */
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--gold-light); outline-offset: 3px;
+  }
+
+  /* Mesazhi i konfirmimit pas RSVP */
+  .rsvp-thanks {
+    display: none; text-align: center; padding: 20px;
+    font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px;
+    color: var(--gold-light); border: 1px solid var(--glass-border); border-radius: 10px;
+  }
+  .rsvp-thanks.show { display: block; animation: fadePulse 1.5s ease-in; }
+
+  .input-field.error { border-color: #E8544B; }
+
+  /* E respekton preferencën e përdoruesit për më pak animacione */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
 </style>
+
 </head>
 <body class="locked">
 
@@ -195,20 +270,61 @@
 
 <div id="main-content">
   
-  <div class="glass-card">
+  <div class="glass-panel" style="margin-top: 80px;">
     <div class="eyebrow reveal">Kanagjegj</div>
     <div class="name reveal">Vlera</div>
-    
-    <p class="story-text reveal">
-      "Ju ftojmë të jeni pjesë e një nate magjike, <br>të mbushur me traditë, muzikë dhe shumë dashuri."
-    </p>
-    
     <div class="divider reveal"></div>
-    
+    <p class="quote reveal">
+      "Ju ftojmë të jeni pjesë e një nate magjike, <br>të mbushur me traditë, muzikë, ngjyra dhe shumë dashuri."
+    </p>
+    <p class="quote reveal" style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-style: normal; text-transform: uppercase; letter-spacing: 2px; color: var(--gold);">
+      Familja Gashi
+    </p>
+  </div>
+
+  <div class="glass-panel">
+    <h2 class="section-title reveal">Kujtime të Arta</h2>
+    <p class="quote reveal" style="font-size: 16px; margin-bottom: 40px;">Disa momente flasin më shumë se fjalët...</p>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1549417229-aa67d3263c09?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80');"></div>
+      <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80'); grid-column: 1 / -1; height: 250px;"></div>
+    </div>
+  </div>
+
+  <div class="glass-panel">
+    <h2 class="section-title reveal">Programi i Natës</h2>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="t-time">18:00</div>
+        <div class="t-title">Pritja e të Ftuarve</div>
+        <div class="t-desc">Hapja e dyerve, pije mirëseardhjeje dhe fillimi i atmosferës muzikore.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-time">19:30</div>
+        <div class="t-title">Hyrja e Nuses</div>
+        <div class="t-desc">Momenti kulminant i mbrëmjes, shoqëruar me këngët tradicionale dhe defat.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-time">21:00</div>
+        <div class="t-title">Rituali i Kënës</div>
+        <div class="t-desc">Tradita e bukur e vendosjes së kënës, një moment emocionesh dhe kujtimesh.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-time">22:30</div>
+        <div class="t-title">Prerja e Tortës & Festa</div>
+        <div class="t-desc">Momenti i ëmbël i natës, pasuar me vallëzim dhe argëtim pa fund.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-panel">
+    <div class="eyebrow reveal" style="margin-bottom: 30px;">Koha & Vendi</div>
     <div class="date-highlight reveal">20 Gusht 2027</div>
     <div class="time-loc reveal">E Premte  |  Ora 18:00  |  Grand Resort</div>
     
-    <p class="story-text reveal" style="font-size: 15px; color: var(--gold);">Atmosfera nga: Shkurte Fejza</p>
+    <div class="divider reveal" style="width: 50px; margin: 30px auto;"></div>
+    <p class="quote reveal" style="font-size: 16px; color: var(--gold-light);">Për atmosferën e mrekullueshme do të kujdeset:<br><strong style="font-size: 22px; font-family: 'Cinzel', serif; display: block; margin-top: 10px;">Shkurte Fejza</strong></p>
 
     <div class="countdown reveal">
       <div class="cd-box"><span class="cd-num" id="days">00</span><span class="cd-label">Ditë</span></div>
@@ -216,20 +332,33 @@
       <div class="cd-box"><span class="cd-num" id="mins">00</span><span class="cd-label">Min</span></div>
       <div class="cd-box"><span class="cd-num" id="secs">00</span><span class="cd-label">Sek</span></div>
     </div>
-
-    <div class="rsvp-container reveal">
-      <div class="rsvp-title">Konfirmimi i Pjesëmarrjes</div>
-      <input type="text" class="input-field" placeholder="Emri dhe Mbiemri i të ftuarit...">
-      <button class="btn-submit">Konfirmo</button>
+    
+    <div class="reveal">
+      <a href="https://maps.google.com" target="_blank" class="map-btn">Shiko Hartën GPS</a>
     </div>
+  </div>
+
+  <div class="glass-panel">
+    <h2 class="section-title reveal">Konfirmimi</h2>
+    <p class="quote reveal" style="font-size: 15px; margin-bottom: 40px;">Prania juaj e bën këtë natë edhe më të bukur. Ju lutemi konfirmoni ardhjen tuaj deri më 10 Gusht.</p>
+    
+    <form class="rsvp-container reveal" id="rsvp-form" novalidate>
+      <label for="rsvp-name" style="display:none;">Emri dhe mbiemri</label>
+      <input type="text" id="rsvp-name" class="input-field" placeholder="Emri dhe Mbiemri juaj..." autocomplete="name" required>
+      <label for="rsvp-count" style="display:none;">Numri i personave</label>
+      <input type="number" id="rsvp-count" class="input-field" placeholder="Numri i personave..." min="1" required>
+      <button type="submit" class="btn-submit">Dërgo Konfirmimin</button>
+      <div class="rsvp-thanks" id="rsvp-thanks">✦ Faleminderit! Konfirmimi juaj u prit me dashuri. Ju presim me padurim! ✦</div>
+    </form>
   </div>
 
 </div>
 
 <script>
-  // Krijimi i petaleve 3D (Bie nga qielli)
+  // Petalet 3D
   function createPetals() {
-    for(let i=0; i<15; i++) {
+    const numPetals = window.innerWidth < 600 ? 15 : 25; // Me shume petale per ekrane te medha
+    for(let i=0; i<numPetals; i++) {
       let petal = document.createElement('div');
       petal.className = 'petal';
       petal.style.left = Math.random() * 100 + 'vw';
@@ -248,36 +377,25 @@
   let playing = false;
 
   startBtn.addEventListener('click', () => {
-    // 1. Zgjerohet vala e floririt
-    ripple.style.transform = 'translate(-50%, -50%) scale(300)';
+    ripple.style.transform = 'translate(-50%, -50%) scale(400)';
     
     setTimeout(() => {
-      // 2. Fshihet hyrja
       introScreen.style.display = 'none';
       document.body.classList.remove('locked');
       ripple.style.opacity = '0';
-      
-      // 3. Shfaqet ftesa
       mainContent.classList.add('show');
       
-      // 4. Nisin të bien petalet
       createPetals();
+      if (typeof checkReveal === 'function' && !('IntersectionObserver' in window)) checkReveal();
       
-      // 5. Shfaqen tekstet një nga një
-      document.querySelectorAll('.reveal').forEach((elem, index) => {
-        setTimeout(() => { elem.classList.add('active'); }, 400 + (index * 200));
-      });
-
-      // 6. Nis muzika
       if(audio.src && audio.getAttribute('src') !== "") {
-        // audio.currentTime = 33; // <-- Hiq dy vizat para nese do qe te nise te sekonda 33
         audio.play().then(() => {
           playing = true;
           musicBtn.innerHTML = '❚❚'; 
           musicBtn.classList.add('spin');
         }).catch(err => console.log(err));
       }
-    }, 900); 
+    }, 1000); 
   });
 
   musicBtn.addEventListener('click', () => {
@@ -292,16 +410,73 @@
     playing = !playing;
   });
 
-  // Countdown
+  // Animacioni gjatë rrokullisjes (Scroll) — IntersectionObserver, më i lëmuar dhe efiçient
+  function checkReveal() {
+    const reveals = document.querySelectorAll('.reveal:not(.active)');
+    const windowHeight = window.innerHeight;
+    reveals.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 80) el.classList.add('active');
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  } else {
+    window.addEventListener('scroll', checkReveal);
+  }
+
+  // Numëruesi (trajton edhe rastin kur data ka kaluar)
   const countDownDate = new Date("Aug 20, 2027 18:00:00").getTime();
-  setInterval(function() {
+  const countdownEl = document.querySelector('.countdown');
+  const timerId = setInterval(function() {
     const now = new Date().getTime();
     const distance = countDownDate - now;
+
+    if (distance <= 0) {
+      clearInterval(timerId);
+      if (countdownEl) {
+        countdownEl.innerHTML = '<div class="date-highlight" style="font-size:22px;">Sonte është nata jonë! ✨</div>';
+      }
+      return;
+    }
+
     document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
     document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
     document.getElementById("mins").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
     document.getElementById("secs").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
   }, 1000);
+
+  // Dërgimi i RSVP-së (validim i thjeshtë + mesazh falenderimi, pa backend)
+  const rsvpForm = document.getElementById('rsvp-form');
+  if (rsvpForm) {
+    rsvpForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('rsvp-name');
+      const countInput = document.getElementById('rsvp-count');
+      let valid = true;
+
+      [nameInput, countInput].forEach(inp => inp.classList.remove('error'));
+
+      if (!nameInput.value.trim()) { nameInput.classList.add('error'); valid = false; }
+      if (!countInput.value || Number(countInput.value) < 1) { countInput.classList.add('error'); valid = false; }
+
+      if (!valid) return;
+
+      nameInput.style.display = 'none';
+      countInput.style.display = 'none';
+      rsvpForm.querySelector('.btn-submit').style.display = 'none';
+      document.getElementById('rsvp-thanks').classList.add('show');
+    });
+  }
 </script>
 
 </body>
