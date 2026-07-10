@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dea & Lorik — Ftesë Martese</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0B132B; /* Blu mesnate super luksoze */
+    --midnight-light: #1C2541;
+    --champagne: #F4D06F; /* Ngjyrë ari/shampanje */
+    --champagne-glow: rgba(244, 208, 111, 0.6);
+    --white: #FFFFFF;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background-color: var(--midnight);
+    /* Sfond magjik me gradient */
+    background-image: radial-gradient(circle at 50% 0%, var(--midnight-light) 0%, var(--midnight) 70%);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body.locked { overflow: hidden; height: 100vh; }
+
+  /* =========================================
+     EFEKTI HYRËS (PULSIMI DHE SHPËRTHIMI)
+  ========================================= */
+  #intro-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: var(--midnight);
+    z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 1.2s ease, visibility 1.2s ease;
+  }
+  
+  .glow-btn {
+    position: relative; width: 100px; height: 100px;
+    border-radius: 50%; background: transparent;
+    border: 2px solid var(--champagne);
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; z-index: 10;
+    box-shadow: 0 0 20px var(--champagne-glow), inset 0 0 20px var(--champagne-glow);
+    animation: breathe 3s infinite;
+  }
+  .glow-btn::after {
+    content: ''; position: absolute; width: 60px; height: 60px;
+    background: var(--champagne); border-radius: 50%;
+    box-shadow: 0 0 30px var(--champagne);
+  }
+  
+  .intro-text {
+    margin-top: 40px; font-family: 'Cinzel', serif; font-size: 14px;
+    letter-spacing: 5px; color: var(--champagne); text-transform: uppercase;
+    animation: fadePulse 2s infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--champagne-glow), inset 0 0 20px var(--champagne-glow); }
+    50% { transform: scale(1.1); box-shadow: 0 0 40px var(--champagne-glow), inset 0 0 40px var(--champagne-glow); }
+  }
+  @keyframes fadePulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+  /* Efekti i shpërthimit kur klikohet */
+  .flash-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: var(--champagne); z-index: 10000; opacity: 0;
+    pointer-events: none; transition: opacity 0.8s ease;
+  }
+
+  /* =========================================
+     TRUPI I FTESËS (GLASSMORPHISM)
+  ========================================= */
+  #main-content {
+    opacity: 0; visibility: hidden;
+    transition: opacity 1.5s ease;
+    padding: 50px 20px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  #main-content.show { opacity: 1; visibility: visible; }
+
+  /* Karta e qelqit (Trendi nr 1 global) */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03); /* Tejdukshmëri */
+    backdrop-filter: blur(15px); /* Efekti i qelqit të mjegullt */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(244, 208, 111, 0.2);
+    border-radius: 20px;
+    padding: 60px 30px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 30px 50px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Shkëlqim i brendshëm në kartë */
+  .glass-card::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(244,208,111,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 6px;
+    color: var(--champagne); text-transform: uppercase; margin-bottom: 20px;
+  }
+
+  /* Emrat Magjikë */
+  .names {
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(65px, 15vw, 90px);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(244,208,111,0.3);
+  }
+
+  .quote {
+    font-size: 15px; font-weight: 300; font-style: italic; line-height: 1.6;
+    color: rgba(255,255,255,0.8); margin-bottom: 40px;
+  }
+
+  .divider {
+    width: 50px; height: 1px; background: var(--champagne);
+    margin: 0 auto 40px auto; opacity: 0.5;
+  }
+
+  .date-big {
+    font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 4px;
+    color: var(--champagne); margin-bottom: 10px; text-transform: uppercase;
+  }
+  .time-loc {
+    font-size: 13px; font-weight: 300; letter-spacing: 2px;
+    color: var(--white); text-transform: uppercase; margin-bottom: 40px;
+  }
+
+  /* Programi Mini */
+  .mini-timeline {
+    display: flex; justify-content: space-between; margin-bottom: 40px;
+    border-top: 1px solid rgba(244,208,111,0.2);
+    border-bottom: 1px solid rgba(244,208,111,0.2);
+    padding: 20px 0;
+  }
+  .t-item { flex: 1; }
+  .t-time { font-family: 'Cinzel', serif; font-size: 18px; color: var(--champagne); margin-bottom: 5px;}
+  .t-desc { font-size: 11px; letter-spacing: 1px; color: rgba(255,255,255,0.7); text-transform: uppercase;}
+
+  /* Countdown i qelqtë */
+  .countdown {
+    display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;
+  }
+  .cd-box {
+    background: rgba(0,0,0,0.2); border: 1px solid rgba(244,208,111,0.15);
+    border-radius: 10px; width: 65px; padding: 12px 0;
+  }
+  .cd-num { font-family: 'Cinzel', serif; font-size: 22px; color: var(--white); display: block;}
+  .cd-label { font-size: 9px; letter-spacing: 2px; color: var(--champagne); text-transform: uppercase; margin-top: 5px; display: block;}
+
+  .map-btn {
+    display: inline-block; padding: 12px 30px; border-radius: 30px;
+    background: transparent; border: 1px solid var(--champagne);
+    color: var(--champagne); text-decoration: none; font-family: 'Cinzel', serif;
+    font-size: 11px; letter-spacing: 3px; transition: 0.4s; text-transform: uppercase;
+  }
+  .map-btn:hover {
+    background: var(--champagne); color: var(--midnight);
+    box-shadow: 0 0 20px var(--champagne-glow);
+  }
+
+  /* Animacioni kaskadë i teksteve */
+  .animate-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .animate-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* Butoni i muzikes */
+  #music-toggle{
+    position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+    border: 1px solid rgba(244,208,111,0.3); color: var(--champagne); font-size: 18px; 
+    cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center;
+  }
+</style>
+</head>
+<body class="locked">
+
+<div class="flash-overlay" id="flash"></div>
+
+<div id="intro-screen">
+  <div class="glow-btn" id="start-btn"></div>
+  <div class="intro-text">Prek për të zbuluar</div>
+</div>
+
+<audio id="bg-audio" loop src="muzika.mp3"></audio>
+<button id="music-toggle" aria-label="Luaj muzikën">♪</button>
+
+<div id="main-content">
+  <div class="glass-card">
+    
+    <div class="eyebrow animate-up">Ftesë Martese</div>
+    
+    <div class="names animate-up">Dea <span style="font-size: 50px; color: var(--champagne);">&</span> Lorik</div>
+    
+    <p class="quote animate-up">
+      "Dashuria nuk është thjesht të shohësh njëri-tjetrin,<br>por të shikosh bashkë në të njëjtin drejtim."
+    </p>
+    
+    <div class="divider animate-up"></div>
+    
+    <div class="date-big animate-up">12 Shtator 2026</div>
+    <div class="time-loc animate-up">E Shtunë | Imperial Palace</div>
+    
+    <div class="mini-timeline animate-up">
+      <div class="t-item">
+        <div class="t-time">18:00</div>
+        <div class="t-desc">Ceremonia</div>
+      </div>
+      <div class="t-item">
+        <div class="t-time">20:00</div>
+        <div class="t-desc">Darka & Festa</div>
+      </div>
+    </div>
+    
+    <div class="countdown animate-up">
+      <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Ditë</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Orë</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Min</span></div>
+      <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Sek</span></div>
+    </div>
+    
+    <div class="animate-up" style="margin-top: 20px;">
+      <a href="https://maps.google.com" target="_blank" class="map-btn">Shiko Hartën</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const startBtn = document.getElementById('start-btn');
+  const introScreen = document.getElementById('intro-screen');
+  const mainContent = document.getElementById('main-content');
+  const flash = document.getElementById('flash');
+  const audio = document.getElementById('bg-audio');
+  const musicBtn = document.getElementById('music-toggle');
+  const animElements = document.querySelectorAll('.animate-up');
+  let playing = false;
+
+  startBtn.addEventListener('click', () => {
+    // 1. Ndizet flash-i i dritës
+    flash.style.opacity = '1';
+    
+    setTimeout(() => {
+      // 2. Fshihet hyrja, hiqet lock-u
+      introScreen.style.display = 'none';
+      document.body.classList.remove('locked');
+      
+      // 3. Shfaqet ftesa e qelqtë
+      mainContent.classList.add('show');
+      
+      // 4. Zhduket flash-i i dritës
+      flash.style.opacity = '0';
+      
+      // 5. Nisin animacionet kaskadë brenda kartës
+      animElements.forEach((elem, index) => {
+        setTimeout(() => { elem.classList.add('visible'); }, 300 + (index * 200));
+      });
+
+      // 6. Fillon muzika (P.sh. instrumental klasik ose violinë)
+      if(audio.src && audio.getAttribute('src') !== "") {
+        // audio.currentTime = 33; // Ndryshoje nëse kënga do prerje
+        audio.play().then(() => {
+          playing = true;
+          musicBtn.textContent = '❚❚'; 
+        }).catch(err => console.log(err));
+      }
+    }, 600); 
+  });
+
+  musicBtn.addEventListener('click', () => {
+    if(!audio.src || audio.getAttribute('src') === ""){
+      musicBtn.textContent = '✕'; return; 
+    }
+    if(playing){ audio.pause(); musicBtn.textContent = '♪'; } 
+    else { audio.play(); musicBtn.textContent = '❚❚'; }
+    playing = !playing;
+  });
+
+  // Countdown për 12 Shtator 2026
+  const countDownDate = new Date("Sep 12, 2026 18:00:00").getTime();
+  const x = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("cd-days").innerHTML = days < 10 ? "0" + days : days;
+    document.getElementById("cd-hours").innerHTML = hours < 10 ? "0" + hours : hours;
+    document.getElementById("cd-mins").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("cd-secs").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.querySelector(".countdown").innerHTML = "<div style='color:var(--champagne); font-family:Cinzel;'>Festa Ka Filluar!</div>";
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>
