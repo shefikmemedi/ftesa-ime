@@ -8,22 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bordeaux: #5A1827; /* E kuqe mbretërore e thellë */
-    --bordeaux-dark: #3A0F19;
+    --bordeaux: #5A1827;
+    --bordeaux-dark: #23080e; /* E kuqe shume e mbyllur (pothuajse e zeze) per sfond */
     --gold: #D4AF37;
-    --gold-light: #F3E5AB;
-    --bg-color: #FCFBF8;
-    --text-dark: #2C2C2C;
+    --gold-light: #FDF0B5;
+    --ivory: #F9F5EC;
   }
   
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   
   body {
-    /* Sfond i pasur me teksturë elegante klasike, jo thjesht i bardhë */
-    background-color: var(--bg-color);
-    background-image: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, rgba(90, 24, 39, 0.08) 100%), url('https://www.transparenttextures.com/patterns/arabesque.png');
-    color: var(--text-dark);
+    /* Sfondi i ri i errët dhe luksoz */
+    background-color: var(--bordeaux-dark);
+    background-image: radial-gradient(circle at top, rgba(212, 175, 55, 0.15) 0%, transparent 60%), 
+                      radial-gradient(circle at bottom, rgba(90, 24, 39, 0.6) 0%, var(--bordeaux-dark) 100%),
+                      url('https://www.transparenttextures.com/patterns/stardust.png');
+    color: var(--ivory);
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
   }
@@ -40,7 +41,7 @@
   .gate-panel {
     position: absolute; top: 0; width: 50vw; height: 100vh;
     background: var(--bordeaux);
-    background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
     transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
     z-index: 10; display: flex; align-items: center; justify-content: center;
   }
@@ -55,10 +56,10 @@
     position: absolute; z-index: 11; width: 120px; height: 120px;
     background: radial-gradient(circle, var(--gold-light) 0%, var(--gold) 80%);
     border-radius: 50%; display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.5);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 15px rgba(255,255,255,0.5);
     cursor: pointer; transition: 0.5s ease; border: 3px solid #FFF;
   }
-  .seal:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5); }
+  .seal:hover { transform: scale(1.05); box-shadow: 0 15px 50px rgba(212, 175, 55, 0.6); }
   .seal span {
     font-family: 'Great Vibes', cursive; font-size: 60px; color: var(--bordeaux-dark);
     text-shadow: 1px 1px 2px rgba(255,255,255,0.6); margin-top: 5px;
@@ -66,7 +67,7 @@
   .seal-text {
     position: absolute; bottom: -40px; font-family: 'Cinzel', serif;
     color: var(--gold); font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
-    width: 250px; text-align: center; animation: pulse 2s infinite; text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    width: 250px; text-align: center; animation: pulse 2s infinite; text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
   }
   @keyframes pulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
   #gate-screen.open .seal { opacity: 0; transform: scale(0.3) rotate(90deg); }
@@ -76,7 +77,7 @@
      TRUPI I FTESËS (FULL WIDTH & ELEGANT)
   ========================================= */
   .container {
-    max-width: 1000px; /* Hapet bukur në të gjitha ekranet */
+    max-width: 1000px;
     margin: 0 auto;
     padding: 80px 20px;
     display: flex;
@@ -85,10 +86,10 @@
     text-align: center;
   }
 
-  /* Ornamenti (Vizualizimi pa foto) */
   .ornament {
     width: 100px;
     margin-bottom: 30px;
+    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.4));
   }
   
   .intro-title {
@@ -100,15 +101,16 @@
     margin-bottom: 20px;
   }
 
-  /* Animacioni i Emrit */
+  /* Animacioni i Emrit ne ngjyre Ari të qelur */
   .bride-name {
     font-family: 'Great Vibes', cursive;
     font-size: clamp(80px, 12vw, 130px);
-    color: var(--bordeaux);
+    color: var(--gold-light);
     margin: 10px 0 40px 0;
     line-height: 1;
     display: flex;
     justify-content: center;
+    text-shadow: 0px 5px 15px rgba(0,0,0,0.5);
   }
   .letter {
     opacity: 0;
@@ -124,40 +126,41 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(22px, 4vw, 28px);
     line-height: 1.6;
-    color: var(--text-dark);
+    color: var(--ivory);
     max-width: 700px;
     margin: 0 auto 50px auto;
     font-style: italic;
+    opacity: 0.9;
   }
   
   .welcome-text {
     font-family: 'Cinzel', serif;
     font-size: 18px;
     letter-spacing: 3px;
-    color: var(--bordeaux);
+    color: var(--gold);
     margin-bottom: 60px;
     text-transform: uppercase;
     line-height: 1.5;
   }
 
   /* =========================================
-     KALENDARI I KORRIKUT 2027
+     KALENDARI I KORRIKUT 2027 (Stili i errët)
   ========================================= */
   .calendar-section {
-    background: var(--white);
-    border: 1px solid var(--gold);
+    background: rgba(35, 8, 14, 0.6); /* E tejdukshme e errët */
+    border: 1px solid rgba(212, 175, 55, 0.4);
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(90, 24, 39, 0.08);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
     margin-bottom: 60px;
     width: 100%;
     max-width: 500px;
-    background-image: radial-gradient(circle at center, rgba(212, 175, 55, 0.03) 0%, transparent 100%);
+    backdrop-filter: blur(5px);
   }
   .cal-title {
     font-family: 'Cinzel', serif;
     font-size: 24px;
-    color: var(--bordeaux);
+    color: var(--gold-light);
     letter-spacing: 4px;
     margin-bottom: 25px;
     text-transform: uppercase;
@@ -178,24 +181,24 @@
   .cal-day {
     font-size: 16px;
     padding: 10px 0;
-    color: var(--text-dark);
+    color: var(--ivory);
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .cal-day.empty { color: transparent; }
   .cal-day.highlight {
-    background: var(--bordeaux);
-    color: #FFF;
+    background: var(--gold);
+    color: var(--bordeaux-dark);
     border-radius: 50%;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgba(90, 24, 39, 0.4);
-    transform: scale(1.1);
-    border: 2px solid var(--gold);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5);
+    transform: scale(1.15);
+    border: 2px solid var(--gold-light);
   }
 
   /* =========================================
-     NUMËRUESI & DETAJET
+     NUMËRUESI & DETAJET (Korniza të errëta)
   ========================================= */
   .details-grid {
     display: flex;
@@ -212,7 +215,8 @@
     padding: 40px 30px;
     border-top: 2px solid var(--gold);
     border-bottom: 2px solid var(--gold);
-    background: rgba(255,255,255,0.6);
+    background: rgba(35, 8, 14, 0.5);
+    backdrop-filter: blur(5px);
   }
   .detail-title {
     font-family: 'Cinzel', serif;
@@ -225,14 +229,14 @@
   .detail-content {
     font-family: 'Cinzel', serif;
     font-size: 22px;
-    color: var(--bordeaux);
+    color: var(--gold-light);
     font-weight: 600;
     line-height: 1.5;
   }
   .detail-sub {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    color: #555;
+    color: rgba(249, 245, 236, 0.7); /* Fildish pak i zbehur */
     margin-top: 10px;
     letter-spacing: 1px;
   }
@@ -252,7 +256,7 @@
   .time-num {
     font-family: 'Cormorant Garamond', serif;
     font-size: 35px;
-    color: var(--bordeaux);
+    color: var(--gold-light);
     font-weight: 600;
   }
   .time-label {
@@ -270,11 +274,10 @@
     position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; border-radius: 50%;
     background: var(--bordeaux); border: 2px solid var(--gold); color: var(--gold); font-size: 22px; 
     cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6); transition: transform 0.3s ease;
   }
   #music-toggle:hover { transform: scale(1.1) rotate(10deg); }
 
-  /* Media query per telefona */
   @media(max-width: 600px) {
     .cal-grid { gap: 5px; }
     .cal-day { font-size: 14px; padding: 8px 0; }
@@ -298,8 +301,8 @@
 <div class="container">
   
   <svg class="ornament" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" fill="#D4AF37" opacity="0.8"/>
-    <circle cx="50" cy="50" r="10" fill="#5A1827"/>
+    <path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" fill="#D4AF37" opacity="0.9"/>
+    <circle cx="50" cy="50" r="10" fill="#23080e"/>
   </svg>
 
   <div class="intro-title">Kanagjegji i Besartës</div>
@@ -317,17 +320,11 @@
   <div class="calendar-section">
     <div class="cal-title">Korrik 2027</div>
     <div class="cal-grid">
-      <div class="cal-header">H</div>
-      <div class="cal-header">M</div>
-      <div class="cal-header">M</div>
-      <div class="cal-header">E</div>
-      <div class="cal-header">P</div>
-      <div class="cal-header">S</div>
+      <div class="cal-header">H</div><div class="cal-header">M</div><div class="cal-header">M</div>
+      <div class="cal-header">E</div><div class="cal-header">P</div><div class="cal-header">S</div>
       <div class="cal-header">D</div>
       
-      <div class="cal-day empty"></div>
-      <div class="cal-day empty"></div>
-      <div class="cal-day empty"></div>
+      <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
       
       <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div>
       <div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
@@ -336,7 +333,8 @@
       <div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div>
       <div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div>
       <div class="cal-day">25</div><div class="cal-day">26</div>
-      <div class="cal-day highlight">27</div> <div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day">31</div>
+      <div class="cal-day highlight">27</div>
+      <div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day">31</div>
     </div>
   </div>
 
@@ -363,7 +361,6 @@
 </div>
 
 <script>
-  // 1. ANIMACIONI I EMRIT "Besarta"
   const brideName = "Besarta";
   const nameContainer = document.getElementById("animated-name");
   
@@ -371,12 +368,10 @@
     let span = document.createElement("span");
     span.textContent = char;
     span.className = "letter";
-    // Çdo shkronjë vonohet me 0.15 sekonda pas tjetrës për efektin e shkrimit
     span.style.transitionDelay = `${index * 0.15}s`; 
     nameContainer.appendChild(span);
   });
 
-  // 2. LOGJIKA E PORTËS & MUZIKËS
   const audio = document.getElementById('bg-audio');
   const musicBtn = document.getElementById('music-toggle');
   const gateScreen = document.getElementById('gate-screen');
@@ -384,16 +379,11 @@
   let playing = false;
 
   sealBtn.addEventListener('click', () => {
-    // Hap portat
     gateScreen.classList.add('open');
     document.body.classList.remove('locked');
     
-    // Pas pak hapjes së portës, nis animacionin e emrit
-    setTimeout(() => {
-      nameContainer.classList.add("animate");
-    }, 1000);
+    setTimeout(() => { nameContainer.classList.add("animate"); }, 1000);
 
-    // Hiq portën krejtësisht nga ekrani dhe lësho muzikën
     setTimeout(() => {
       gateScreen.style.display = 'none';
       if(audio.src && audio.getAttribute('src') !== "") {
@@ -414,7 +404,6 @@
     playing = !playing;
   });
 
-  // 3. NUMËRUESI MBRAPSHT (27 Korrik 2027, Ora 12:00)
   const countDownDate = new Date("Jul 27, 2027 12:00:00").getTime();
 
   const x = setInterval(function() {
