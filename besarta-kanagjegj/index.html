@@ -3,30 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kanagjegji i Besartës — Ftesë</title>
+<title>Kanagjegji i Besartës</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bordeaux: #4A0E17; /* Ngjyra mbretërore e kuqe e errët */
+    --bordeaux: #4A0E17; 
     --gold: #C5A059;
     --gold-light: #E8D09B;
     --ivory: #FDFBF7;
+    --white: #FFFFFF;
     --text-dark: #2C2C2C;
+    --gray-light: #F0EFEA;
   }
   
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background-color: var(--ivory);
+    background-color: var(--gray-light);
     color: var(--text-dark);
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
   }
-  body.locked { overflow: hidden; }
+  body.locked { overflow: hidden; height: 100vh; }
 
   /* =========================================
-     EFEKTI I PORTËS (GATE REVEAL)
+     EFEKTI I PORTËS (GATE REVEAL) - I PAPREKUR
   ========================================= */
   #gate-screen {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -36,50 +38,39 @@
   .gate-panel {
     position: absolute; top: 0; width: 50vw; height: 100vh;
     background: var(--bordeaux);
-    transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 10;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 10; display: flex; align-items: center; justify-content: center;
   }
   .gate-left { 
-    left: 0; 
-    border-right: 1px solid var(--gold);
-    /* Pattern i lehte lulesh per background */
+    left: 0; border-right: 1px solid var(--gold);
     background-image: radial-gradient(var(--gold) 0.5px, transparent 0.5px);
     background-size: 20px 20px;
-    background-color: var(--bordeaux);
-    background-position: 0 0;
   }
   .gate-right { 
-    right: 0; 
-    border-left: 1px solid var(--gold);
+    right: 0; border-left: 1px solid var(--gold);
     background-image: radial-gradient(var(--gold) 0.5px, transparent 0.5px);
     background-size: 20px 20px;
-    background-color: var(--bordeaux);
-    background-position: 0 0;
   }
   
-  /* Kur porta hapet */
   #gate-screen.open .gate-left { transform: translateX(-100%); }
   #gate-screen.open .gate-right { transform: translateX(100%); }
   #gate-screen.open { pointer-events: none; }
 
-  /* Vula qe qendron ne mes */
   .seal {
-    position: absolute; z-index: 11; width: 120px; height: 120px;
+    position: absolute; z-index: 11; width: 110px; height: 110px;
     background: radial-gradient(circle, var(--gold-light) 0%, var(--gold) 80%);
     border-radius: 50%; display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4), inset 0 0 15px rgba(255,255,255,0.4);
-    cursor: pointer; transition: opacity 0.8s ease, transform 0.3s ease;
-    border: 2px solid #FFF;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.4);
+    cursor: pointer; transition: 0.5s ease; border: 2px solid #FFF;
   }
   .seal:hover { transform: scale(1.05); }
   .seal span {
-    font-family: 'Great Vibes', cursive; font-size: 55px; color: var(--bordeaux);
+    font-family: 'Great Vibes', cursive; font-size: 50px; color: var(--bordeaux);
     text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
   }
   .seal-text {
-    position: absolute; bottom: -40px; font-family: 'Cinzel', serif;
-    color: var(--gold); font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+    position: absolute; bottom: -35px; font-family: 'Cinzel', serif;
+    color: var(--gold); font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
     width: 200px; text-align: center; animation: pulse 2s infinite;
   }
   @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
@@ -87,200 +78,391 @@
   #gate-screen.open .seal-text { opacity: 0; }
 
   /* =========================================
-     STRUKTURA E FTESËS (ELEGANCË & PERFEKSION)
+     TRUPI I FTESËS (STILI I RI I PASUR)
   ========================================= */
-  .container {
-    max-width: 600px; margin: 0 auto; padding: 40px 20px;
-    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
-    background: url('https://www.transparenttextures.com/patterns/clean-textile.png'); /* Jep nje teksture letre te vertete */
+  .app-container {
+    max-width: 450px; /* E bën të duket fiks si ekran telefoni edhe në kompjuter */
+    margin: 0 auto;
+    background: var(--ivory);
+    box-shadow: 0 0 40px rgba(0,0,0,0.08);
+    position: relative;
+    padding-bottom: 60px;
   }
 
-  /* Korniza floriri qe mbeshtjell ftesen */
-  .frame {
-    width: 100%; border: 1px solid var(--gold); padding: 50px 30px;
-    text-align: center; position: relative; background: rgba(253, 251, 247, 0.85);
-    box-shadow: 0 15px 40px rgba(74, 14, 23, 0.05);
+  /* Seksioni 1: Hyrja me Foto në formë Harku (Trendy) */
+  .hero-section {
+    padding: 60px 30px 40px 30px;
+    text-align: center;
+    background: url('https://www.transparenttextures.com/patterns/clean-textile.png');
   }
-  .frame::before, .frame::after {
-    content: ''; position: absolute; width: 30px; height: 30px; border: 2px solid var(--gold);
+  .arch-image {
+    width: 100%;
+    height: 400px;
+    background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop'); 
+    background-size: cover;
+    background-position: center;
+    border-radius: 200px 200px 0 0; /* Forma e harkut që është shumë në modë */
+    border: 1px solid var(--gold);
+    margin-bottom: 30px;
+    box-shadow: 0 15px 30px rgba(74, 14, 23, 0.1);
   }
-  .frame::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-  .frame::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .bride-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 70px;
+    color: var(--bordeaux);
+    margin: 10px 0;
+    line-height: 1;
+  }
 
-  .eyebrow {
-    font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 5px;
-    color: var(--gold); text-transform: uppercase; margin-bottom: 25px;
+  /* Seksioni 2: Ftesa Formale */
+  .invite-section {
+    padding: 40px 30px;
+    text-align: center;
+    background: var(--white);
   }
-
-  .host {
-    font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 500;
-    color: var(--bordeaux); letter-spacing: 3px; text-transform: uppercase;
+  .invite-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-dark);
+    font-style: italic;
     margin-bottom: 20px;
   }
-
-  .invite-text {
-    font-size: 16px; color: var(--text-dark); line-height: 1.8;
-    margin-bottom: 30px; font-weight: 300; font-style: italic;
+  .host-name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--bordeaux);
+    letter-spacing: 2px;
+    font-weight: 600;
   }
 
-  .bride-name {
-    font-family: 'Great Vibes', cursive; font-size: 85px; color: var(--bordeaux);
-    margin: 10px 0 40px 0; line-height: 1; text-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  /* Seksioni 3: Numëruesi Mbrapsht (Countdown) */
+  .countdown-section {
+    padding: 50px 20px;
+    background: var(--bordeaux);
+    color: var(--ivory);
+    text-align: center;
+  }
+  .countdown-title {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+  .timer-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  .timer-box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    padding: 15px 10px;
+    border-radius: 8px;
+    width: 75px;
+  }
+  .timer-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold-light);
+    display: block;
+  }
+  .timer-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    display: block;
+    opacity: 0.8;
   }
 
-  .divider {
-    width: 80px; height: 1px; background: var(--gold); margin: 0 auto 40px auto;
+  /* Seksioni 4: Programi (Timeline) */
+  .program-section {
+    padding: 60px 30px;
+    background: var(--ivory);
   }
-
-  /* Sekcioni i Dates & Ores */
-  .datetime-box {
-    display: flex; flex-direction: column; align-items: center; margin-bottom: 40px;
-  }
-  .date-big {
-    font-family: 'Cinzel', serif; font-size: 26px; color: var(--bordeaux);
-    letter-spacing: 4px; margin-bottom: 10px; font-weight: 600;
-  }
-  .time-text {
-    font-family: 'Montserrat', sans-serif; font-size: 14px; letter-spacing: 3px;
-    color: var(--text-dark); text-transform: uppercase;
-  }
-
-  /* Sekcioni i Lokacionit */
-  .venue-box {
-    background: var(--bordeaux); color: var(--ivory); padding: 30px;
-    width: 100%; border-radius: 4px; margin-bottom: 40px;
-  }
-  .venue-title {
-    font-family: 'Cinzel', serif; font-size: 22px; margin-bottom: 15px;
-    letter-spacing: 3px; color: var(--gold);
-  }
-  .venue-address {
-    font-size: 15px; line-height: 1.6; font-weight: 300; letter-spacing: 1px;
-  }
-  .map-btn {
-    display: inline-block; margin-top: 20px; font-family: 'Cinzel', serif;
-    font-size: 11px; letter-spacing: 2px; color: var(--ivory); text-decoration: none;
-    border-bottom: 1px solid var(--gold); padding-bottom: 3px; transition: 0.3s;
-  }
-  .map-btn:hover { color: var(--gold); }
-
-  /* Sekcioni i Muzikes / Motrat Mustafa */
-  .entertainment {
-    padding: 20px 0; border-top: 1px dashed var(--gold); border-bottom: 1px dashed var(--gold);
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 24px;
+    color: var(--bordeaux);
+    text-align: center;
     margin-bottom: 40px;
+    letter-spacing: 2px;
   }
-  .ent-title { font-size: 13px; letter-spacing: 3px; color: var(--text-dark); text-transform: uppercase; margin-bottom: 10px; }
-  .ent-name { font-family: 'Cinzel', serif; font-size: 24px; color: var(--bordeaux); font-weight: 600; letter-spacing: 2px;}
-
-  .closing {
-    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 3px;
-    color: var(--bordeaux); margin-top: 20px; line-height: 1.8; text-transform: uppercase;
+  .timeline {
+    position: relative;
+    border-left: 1px solid var(--gold);
+    margin-left: 20px;
+    padding-left: 25px;
+  }
+  .timeline-item {
+    margin-bottom: 35px;
+    position: relative;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -31px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background: var(--ivory);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+  }
+  .time {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .event-desc {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--bordeaux);
+  }
+  .event-sub {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
   }
 
-  /* Butoni i muzikes (Floating) */
+  /* Seksioni 5: Detajet & Lokacioni */
+  .location-section {
+    padding: 50px 30px;
+    background: var(--white);
+    text-align: center;
+  }
+  .venue-name {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    color: var(--bordeaux);
+    margin: 15px 0;
+  }
+  .btn-gold {
+    display: inline-block;
+    background: var(--bordeaux);
+    color: var(--ivory);
+    padding: 14px 30px;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    border: 1px solid var(--bordeaux);
+    transition: 0.3s;
+  }
+  .btn-gold:hover {
+    background: transparent;
+    color: var(--bordeaux);
+  }
+
+  /* Seksioni 6: RSVP (Konfirmimi) */
+  .rsvp-section {
+    padding: 60px 30px;
+    background: var(--gray-light);
+    text-align: center;
+  }
+  .rsvp-form {
+    background: var(--white);
+    padding: 30px 20px;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+  }
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid #CCC;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+  }
+  .radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .radio-group label {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--bordeaux);
+    cursor: pointer;
+  }
+
   #music-toggle{
-    position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; border-radius: 50%;
-    background: var(--bordeaux); border: 2px solid var(--gold); color: var(--gold); font-size: 20px; 
+    position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; border-radius: 50%;
+    background: var(--bordeaux); border: 2px solid var(--gold); color: var(--gold); font-size: 18px; 
     cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   }
-  #music-toggle:hover { transform: scale(1.1); }
 </style>
 </head>
 <body class="locked">
 
-<!-- PORTA LUKSOZE HYRËSE -->
 <div id="gate-screen">
   <div class="gate-panel gate-left"></div>
   <div class="gate-panel gate-right"></div>
-  
   <div class="seal" id="seal-btn">
     <span>B</span>
     <div class="seal-text">Prek për të hapur</div>
   </div>
 </div>
 
-<!-- MUZIKA (Mos harro të ruash këngën fiks me këtë emër) -->
 <audio id="bg-audio" loop src="muzika.mp3"></audio>
 <button id="music-toggle" aria-label="Luaj muzikën">♪</button>
 
-<div class="container">
-  <div class="frame">
-    <div class="eyebrow">Kanagjegj</div>
-    
-    <div class="host">Familja Mustafi</div>
-    <div class="invite-text">
-      Ka nderin dhe kënaqësinë t'ju ftojë të ndani me ne emocionet <br>dhe gëzimin e dasmës së bijës sonë,
-    </div>
-    
+<div class="app-container">
+  
+  <section class="hero-section">
+    <div class="arch-image"></div>
+    <div class="hero-title">Kanagjegj</div>
     <div class="bride-name">Besarta</div>
-    
-    <div class="divider"></div>
-    
-    <div class="datetime-box">
-      <div class="date-big">31 KORRIK 2027</div>
-      <div class="time-text">E Shtunë &nbsp;|&nbsp; Ora 15:00</div>
-    </div>
-    
-    <div class="venue-box">
-      <div class="venue-title">Restorant Mont Blanc</div>
-      <div class="venue-address">
-        Ju mirëpresim për të festuar së bashku <br>në këtë ditë të veçantë.
+  </section>
+
+  <section class="invite-section">
+    <p class="invite-text">
+      Në këtë ditë të veçantë plot gëzim dhe emocione, kemi nderin t'ju ftojmë të festojmë së bashku Kanagjegjin e bijës sonë.
+    </p>
+    <div class="host-name">FAMILJA MUSTAFI</div>
+  </section>
+
+  <section class="countdown-section">
+    <div class="countdown-title">Numërimi mbrapsht</div>
+    <div class="timer-grid">
+      <div class="timer-box">
+        <span class="timer-num" id="days">00</span>
+        <span class="timer-label">Ditë</span>
       </div>
-      <a href="https://maps.google.com" target="_blank" rel="noopener" class="map-btn">SHIKO HARTËN ➔</a>
+      <div class="timer-box">
+        <span class="timer-num" id="hours">00</span>
+        <span class="timer-label">Orë</span>
+      </div>
+      <div class="timer-box">
+        <span class="timer-num" id="mins">00</span>
+        <span class="timer-label">Minuta</span>
+      </div>
+      <div class="timer-box">
+        <span class="timer-num" id="secs">00</span>
+        <span class="timer-label">Sekonda</span>
+      </div>
     </div>
-    
-    <div class="entertainment">
-      <div class="ent-title">Për një atmosferë të paharrueshme, muzika nga:</div>
-      <div class="ent-name">Motrat Mustafa</div>
+  </section>
+
+  <section class="program-section">
+    <h2 class="section-title">Programi</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time">15:00</div>
+        <div class="event-desc">Pritja e të ftuarve</div>
+        <div class="event-sub">Koktej dhe Fotografi</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">15:30</div>
+        <div class="event-desc">Hyrja e Nuses</div>
+        <div class="event-sub">Nisja e ceremonisë së Kanagjegjit</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">16:00</div>
+        <div class="event-desc">Muzikë Live</div>
+        <div class="event-sub">Atmosferë nga Motrat Mustafa</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">18:00</div>
+        <div class="event-desc">Darka & Torta</div>
+        <div class="event-sub">Festojmë së bashku</div>
+      </div>
     </div>
-    
-    <div class="closing">
-      Ju mirëpresim me dashuri!
+  </section>
+
+  <section class="location-section">
+    <h2 class="section-title">Ku & Kur</h2>
+    <div class="venue-name">Restorant Mont Blanc</div>
+    <p class="invite-text" style="font-size: 15px; margin: 10px 0;">31 Korrik 2027<br>Ju mirëpresim me dashuri!</p>
+    <a href="https://maps.google.com" target="_blank" class="btn-gold">SHIKO HARTËN</a>
+  </section>
+
+  <section class="rsvp-section">
+    <div class="rsvp-form">
+      <h2 class="section-title" style="font-size: 18px; margin-bottom: 20px;">Konfirmimi i Pjesëmarrjes</h2>
+      <div class="radio-group">
+        <label><input type="radio" name="rsvp"> Do të vij (Po)</label>
+        <label><input type="radio" name="rsvp"> Nuk mundem (Jo)</label>
+      </div>
+      <input type="text" class="input-field" placeholder="Shkruaj Emrin dhe Mbiemrin">
+      <button class="btn-gold" style="width: 100%; border:none; cursor:pointer;">DËRGO</button>
     </div>
-  </div>
+  </section>
+
 </div>
 
 <script>
+  // --- LOGJIKA E PORTËS DHE MUZIKËS ---
   const audio = document.getElementById('bg-audio');
   const musicBtn = document.getElementById('music-toggle');
   const gateScreen = document.getElementById('gate-screen');
   const sealBtn = document.getElementById('seal-btn');
   let playing = false;
 
-  // Logjika per te hapur portat
   sealBtn.addEventListener('click', () => {
     gateScreen.classList.add('open');
     document.body.classList.remove('locked');
-
-    // Nis muziken pas pak sekondash kur porta eshte duke u hapur
     setTimeout(() => {
-      gateScreen.style.display = 'none'; // Fshihe plotesisht div-in nga mbrapa
-      
+      gateScreen.style.display = 'none';
       if(audio.src && audio.getAttribute('src') !== "") {
         audio.play().then(() => {
           playing = true;
           musicBtn.textContent = '❚❚'; 
-        }).catch(err => {
-          console.log("Muzika ka nevojë për leje:", err);
-        });
+        }).catch(err => console.log(err));
       }
-    }, 1500); // Koha sa zgjat animacioni i portave
+    }, 1500); 
   });
 
-  // Logjika per butonin lart te muzikes
   musicBtn.addEventListener('click', () => {
     if(!audio.src || audio.getAttribute('src') === ""){
-      musicBtn.textContent = '✕';
-      return; 
+      musicBtn.textContent = '✕'; return; 
     }
-    if(playing){ 
-      audio.pause(); musicBtn.textContent = '♪'; 
-    } else { 
-      audio.play(); musicBtn.textContent = '❚❚'; 
-    }
+    if(playing){ audio.pause(); musicBtn.textContent = '♪'; } 
+    else { audio.play(); musicBtn.textContent = '❚❚'; }
     playing = !playing;
   });
+
+  // --- LOGJIKA E NUMËRUESIT (COUNTDOWN) ---
+  // Data e Kanagjegjit: 31 Korrik 2027, Ora 15:00
+  const countDownDate = new Date("Jul 31, 2027 15:00:00").getTime();
+
+  const x = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+    document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+    document.getElementById("mins").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("secs").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+    // Nese data ka kaluar
+    if (distance < 0) {
+      clearInterval(x);
+      document.querySelector(".timer-grid").innerHTML = "<div class='timer-num'>Dita e Madhe!</div>";
+    }
+  }, 1000);
 </script>
 
 </body>
