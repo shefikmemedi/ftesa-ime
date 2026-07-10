@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shefik & Nusja — Ftesë Dasme</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<!-- Shtova fontin "Great Vibes" për kaligrafinë e emrave dhe tekstin e ftesës -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Tenor+Sans&family=Italiana&family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root{
     --ivory:#FAF5EC;
-    --wine:#3E4A38;
+    --wine:#4f5a3c; /* Ngjyra jeshile e errët si te vula e shokut */
     --gold:#B08D57;
     --sage:#7C8A6E;
     --charcoal:#2E2A26;
@@ -24,7 +23,6 @@
     overflow-x:hidden;
   }
   
-  /* Bllokon scroll-in derisa të hapet ftesa */
   body.locked { overflow: hidden; }
 
   .section{
@@ -67,12 +65,12 @@
   .frame::before{ top:-8px; left:-8px; border-right:none; border-bottom:none; }
   .frame::after{ bottom:-8px; right:-8px; border-left:none; border-top:none; }
 
-  /* OVERLAY: PREK PËR TË HAPUR */
+  /* OVERLAY I RI (SI I SHOKUT) */
   #welcome-screen {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: #F4EFE6;
+    background: radial-gradient(circle at center, #F4EFE6 0%, #E8DFCE 100%);
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -85,44 +83,54 @@
     opacity: 0;
     visibility: hidden;
   }
-  .fresh-circle {
+  .seal-container {
     position: relative;
-    width: 150px; height: 150px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 40px;
-    animation: float 3s ease-in-out infinite;
-    background: white;
-    box-shadow: 0 10px 30px rgba(176,141,87,0.15);
+    animation: pulse 2.5s infinite ease-in-out;
   }
-  .fresh-circle span {
-    font-family: 'Italiana', serif;
-    color: var(--wine);
-    font-size: 42px;
-    letter-spacing: 2px;
-  }
-  .fresh-leaf {
+  .olive-branch-svg {
     position: absolute;
-    width: 180px; height: 180px;
-    pointer-events: none;
-    opacity: 0.6;
+    width: 220px;
+    z-index: 1;
     transform: rotate(15deg);
+    opacity: 0.85;
+  }
+  /* Vula e dyllit me efekt 3D */
+  .wax-seal-3d {
+    position: relative;
+    z-index: 2;
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #728258, #4f5a3c);
+    box-shadow: 
+      inset 0 0 10px rgba(0,0,0,0.4),
+      inset 0 0 25px rgba(0,0,0,0.3),
+      5px 15px 25px rgba(0,0,0,0.3);
+    border: 2px solid #5d6b46;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .wax-seal-3d span {
+    font-family: 'Great Vibes', cursive;
+    color: #2b3320; /* E gjelbër shumë e errët, si gropë në dyll */
+    font-size: 50px;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.2), -1px -1px 2px rgba(0,0,0,0.5);
   }
   .welcome-text {
     font-family: 'Tenor Sans', sans-serif;
     letter-spacing: 5px;
     font-size: 14px;
-    color: var(--wine);
+    color: #7b786c;
     text-transform: uppercase;
-    opacity: 0.8;
   }
-  @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
   }
 
   /* HERO */
@@ -141,7 +149,6 @@
   }
   #hero > *:not(.hero-art){ position:relative; z-index:1; }
   
-  /* EMRAT ME KALIGRAFI */
   .names{
     font-family:'Great Vibes', cursive;
     font-size:clamp(65px, 14vw, 120px);
@@ -187,18 +194,11 @@
   #date-section{ background:var(--wine); color:var(--ivory); }
   #date-section .eyebrow{ color:var(--gold); }
   .big-date{
-    display:flex;
-    gap:22px;
-    flex-wrap:wrap;
-    justify-content:center;
-    align-items:baseline;
-    margin-top:20px;
+    display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:baseline; margin-top:20px;
   }
   .big-date .num{ font-family:'Italiana', serif; font-size:56px; color:var(--gold); }
   .big-date .sep{ font-family:'Italiana', serif; font-size:40px; color:var(--gold); opacity:.6; }
-  .date-labels{
-    display:flex; gap:44px; justify-content:center; margin-top:8px;
-  }
+  .date-labels{ display:flex; gap:44px; justify-content:center; margin-top:8px; }
   .date-labels span{ font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px; opacity:.75; width:70px; text-align:center; }
   .day-time{ margin-top:30px; font-family:'Tenor Sans', sans-serif; font-size:13px; letter-spacing:2px; opacity:.85; }
 
@@ -209,74 +209,55 @@
     text-align: center;
   }
   .arabic-text {
-    font-family: 'Amiri', serif;
-    font-size: 46px;
-    color: var(--wine);
-    direction: rtl;
-    line-height: 1.6;
-    margin: 0 auto 15px auto;
+    font-family: 'Amiri', serif; font-size: 46px; color: var(--wine); direction: rtl; line-height: 1.6; margin: 0 auto 15px auto;
   }
   .albanian-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-style: italic;
-    color: var(--charcoal);
-    line-height: 1.5;
-    max-width: 600px;
-    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--charcoal); line-height: 1.5; max-width: 600px; margin: 0 auto;
   }
   .dua-arabic {
-    font-family: 'Amiri', serif;
-    font-size: 28px;
-    color: var(--wine);
-    direction: rtl;
-    margin: 50px auto 15px auto;
-    max-width: 700px;
+    font-family: 'Amiri', serif; font-size: 28px; color: var(--wine); direction: rtl; margin: 50px auto 15px auto; max-width: 700px;
   }
 
-  /* 3 BOKSET E TRADITËS (DETAILS) */
+  /* RREGULLIMI I RI I KUTIVE (2 lart, Banketi në qendër) */
   #details { background: #fdfaf5; }
-  .details-grid-3 {
+  .details-grid {
     display: grid;
     gap: 30px;
     margin-top: 40px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 800px;
   }
-  @media(min-width: 900px){
-    .details-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  
+  /* Për ekrane më të mëdha se telefoni (Tablet / Desktop) */
+  @media(min-width: 768px){
+    .details-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .banketi-box {
+      grid-column: 1 / -1; /* E shtrin në të dyja kolonat */
+      max-width: 600px;    /* E mban madhësinë perfekte në qendër */
+      margin: 0 auto;      /* E qendërzon */
+    }
   }
+
   .venue{ font-family:'Italiana', serif; font-size:26px; color:var(--wine); margin-bottom:10px;}
   .venue-sub{ font-size:17px; color:var(--charcoal); opacity:.8; line-height: 1.5;}
   .map-link{
-    display:inline-block; margin-top:16px;
-    font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
-    color:var(--sage); text-decoration:none;
-    border-bottom:1px solid var(--sage); padding-bottom:2px;
+    display:inline-block; margin-top:16px; font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
+    color:var(--sage); text-decoration:none; border-bottom:1px solid var(--sage); padding-bottom:2px;
   }
 
-  /* Pjesa përmbyllëse */
-  #closing {
-    background: var(--ivory);
-    padding: 40px 24px 80px 24px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-  }
-
-  /* MUSIC TOGGLE */
+  #closing { background: var(--ivory); padding: 40px 24px 80px 24px; text-align: center; display: flex; justify-content: center; }
+  
   #music-toggle{
-    position:fixed; bottom:22px; right:22px;
-    width:46px; height:46px; border-radius:50%;
-    background:var(--wine); border:1px solid var(--gold);
-    color:var(--gold); font-size:18px; cursor:pointer;
+    position:fixed; bottom:22px; right:22px; width:46px; height:46px; border-radius:50%;
+    background:var(--wine); border:1px solid var(--gold); color:var(--gold); font-size:18px; cursor:pointer;
     z-index:50; display:flex; align-items:center; justify-content:center;
   }
 
   footer{
-    text-align:center; padding:30px;
-    font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
-    color:var(--sage); background:var(--wine); color: var(--ivory);
+    text-align:center; padding:30px; font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
+    background:var(--wine); color: var(--ivory);
   }
 </style>
 </head>
@@ -284,14 +265,21 @@
 
 <!-- OVERLAY: PREK PËR TË HAPUR -->
 <div id="welcome-screen">
-  <div class="fresh-circle">
-    <!-- Gjethe botanike e thjeshtë SVG -->
-    <svg class="fresh-leaf" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 80 C 20 40, 50 10, 80 10 C 80 50, 50 80, 20 80 Z" fill="none" stroke="#7C8A6E" stroke-width="0.5"/>
-      <path d="M80 10 C 60 30, 40 50, 20 80" fill="none" stroke="#7C8A6E" stroke-width="0.5"/>
+  <div class="seal-container">
+    <!-- Dega e ullirit -->
+    <svg class="olive-branch-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 40 160 Q 100 100 160 40" fill="none" stroke="#7C8A6E" stroke-width="2"/>
+      <path d="M 160 40 Q 140 60 145 80 Q 165 70 160 40 Z" fill="#7C8A6E"/>
+      <path d="M 130 70 Q 110 80 115 100 Q 135 90 130 70 Z" fill="#7C8A6E"/>
+      <path d="M 100 100 Q 80 110 85 130 Q 105 120 100 100 Z" fill="#7C8A6E"/>
+      <path d="M 140 50 Q 150 40 170 45 Q 160 60 140 50 Z" fill="#93a384"/>
+      <path d="M 110 80 Q 120 70 140 75 Q 130 90 110 80 Z" fill="#93a384"/>
+      <path d="M 80 110 Q 90 100 110 105 Q 100 120 80 110 Z" fill="#93a384"/>
     </svg>
-    <!-- Inicialet (Ndrysho N me shkronjën e parë të nuses) -->
-    <span>S&N</span>
+    <!-- Vula me 3D efekt -->
+    <div class="wax-seal-3d">
+      <span>S&N</span>
+    </div>
   </div>
   <div class="welcome-text">Prek për të hapur</div>
 </div>
@@ -301,7 +289,6 @@
 <button id="music-toggle" aria-label="Aktivizo muzikën">♪</button>
 
 <section id="hero" class="section">
-  <!-- Sfondi abstrakt -->
   <svg class="hero-art" viewBox="0 0 800 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <g fill="none" stroke="#3E4A38" stroke-width="1.4">
       <circle cx="330" cy="470" r="70"/>
@@ -318,18 +305,9 @@
   </svg>
   
   <div class="eyebrow">Ftesë Dasme</div>
-  
-  <!-- EMRAT E ÇIFTIT ME KALIGRAFI -->
   <h1 class="names">Shefik &amp; [Emri]</h1>
-  
-  <!-- FAMILJET -->
   <div class="families">Familja Memedi &nbsp;&middot;&nbsp; Familja [Mbiemri]</div>
-  
-  <!-- TEKSTI I FTESËS -->
-  <p class="invite-text">
-    Kemi nderin dhe kënaqësinë që t'ju ftojmë të ndani me ne gëzimin e martesës së fëmijëve tanë.
-  </p>
-  
+  <p class="invite-text">Kemi nderin dhe kënaqësinë që t'ju ftojmë të ndani me ne gëzimin e martesës së fëmijëve tanë.</p>
   <div class="divider"></div>
   <div class="date-line">20 SHTATOR 2026 · GOSTIVAR</div>
 </section>
@@ -337,17 +315,9 @@
 <section id="date-section" class="section" style="min-height: 50vh;">
   <div class="eyebrow">Data e Dasmës</div>
   <div class="big-date">
-    <span class="num">20</span>
-    <span class="sep">·</span>
-    <span class="num">09</span>
-    <span class="sep">·</span>
-    <span class="num">2026</span>
+    <span class="num">20</span><span class="sep">·</span><span class="num">09</span><span class="sep">·</span><span class="num">2026</span>
   </div>
-  <div class="date-labels">
-    <span>DITA</span>
-    <span>MUAJI</span>
-    <span>VITI</span>
-  </div>
+  <div class="date-labels"><span>DITA</span><span>MUAJI</span><span>VITI</span></div>
   <div class="day-time">E DIEL  |  ORA 17:00</div>
 </section>
 
@@ -355,7 +325,6 @@
   <div class="arabic-text">وَخَلَقْنَاكُمْ أَزْوَاجًا</div>
   <p class="albanian-text">"Dhe Ne ju krijuam në çifte."</p>
   <div class="eyebrow" style="margin-top: 15px; color: var(--sage);">Kur'an, En-Nebe' 78:8</div>
-
   <div class="dua-arabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
   <p class="albanian-text">"Allahu ju bekoftë, ju dhëntë bereqet dhe ju bashkoftë në çdo të mirë."</p>
 </section>
@@ -364,8 +333,8 @@
   <div class="eyebrow">Programi i Dasmës</div>
   <h2 style="font-family:'Italiana',serif; font-size:32px; color:var(--wine);">Vendi & Ora</h2>
   
-  <div class="details-grid-3">
-    <!-- BOX 1: PETKAT -->
+  <div class="details-grid">
+    <!-- BOX 1: PETKAT (Lart - Majtas) -->
     <div class="frame">
       <div class="venue">Petkat</div>
       <div class="venue-sub">
@@ -375,7 +344,7 @@
       </div>
     </div>
     
-    <!-- BOX 2: INGJE -->
+    <!-- BOX 2: INGJE (Lart - Djathtas) -->
     <div class="frame">
       <div class="venue">Ingje</div>
       <div class="venue-sub">
@@ -385,8 +354,8 @@
       </div>
     </div>
     
-    <!-- BOX 3: BANKETI -->
-    <div class="frame">
+    <!-- BOX 3: BANKETI (Poshtë - Në qendër, zë gjithë gjerësinë) -->
+    <div class="frame banketi-box">
       <div class="venue">Banketi</div>
       <div class="venue-sub">
         Dasma Kryesore.<br><br>
@@ -398,7 +367,6 @@
   </div>
 </section>
 
-<!-- TEKSTI PËRMBYLLËS -->
 <section id="closing">
   <p class="invite-text" style="max-width: 750px; font-size: 26px;">
     Prania juaj do të jetë bekim për çiftin e ri dhe nder dhe gëzim për familjet Memedi &amp; [Mbiemri i Nuses].
