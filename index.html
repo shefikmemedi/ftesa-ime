@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shefik & Nusja — Ftesë Dasme</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Tenor+Sans&family=Italiana&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Shtova fontin "Great Vibes" për kaligrafinë e emrave dhe tekstin e ftesës -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Tenor+Sans&family=Italiana&family=Amiri:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root{
     --ivory:#FAF5EC;
@@ -66,7 +67,7 @@
   .frame::before{ top:-8px; left:-8px; border-right:none; border-bottom:none; }
   .frame::after{ bottom:-8px; right:-8px; border-left:none; border-top:none; }
 
-  /* OVERLAY: PREK PËR TË HAPUR (Dizajn i ri "Fresh") */
+  /* OVERLAY: PREK PËR TË HAPUR */
   #welcome-screen {
     position: fixed;
     top: 0; left: 0;
@@ -139,23 +140,38 @@
     pointer-events:none;
   }
   #hero > *:not(.hero-art){ position:relative; z-index:1; }
+  
+  /* EMRAT ME KALIGRAFI */
   .names{
-    font-family:'Italiana', serif;
-    font-size:clamp(48px, 9vw, 86px);
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(65px, 14vw, 120px);
     line-height:1.1;
     color:var(--wine);
-    letter-spacing:2px;
+    font-weight: 400;
+    margin: 10px 0 30px 0;
   }
-  .amp{
-    display:block;
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-size:clamp(28px, 5vw, 44px);
-    color:var(--gold);
-    margin:10px 0;
+  
+  .families {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--wine);
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
+  
+  .invite-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--charcoal);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
   .date-line{
-    margin-top:24px;
+    margin-top:30px;
     font-size:18px;
     letter-spacing:3px;
     font-family:'Tenor Sans', sans-serif;
@@ -227,7 +243,6 @@
     width: 100%;
     max-width: 1000px;
   }
-  /* Në kompjuter bëhen 3 shtylla, në telefon rreshtohen njëra nën tjetrën */
   @media(min-width: 900px){
     .details-grid-3 { grid-template-columns: repeat(3, 1fr); }
   }
@@ -238,6 +253,15 @@
     font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
     color:var(--sage); text-decoration:none;
     border-bottom:1px solid var(--sage); padding-bottom:2px;
+  }
+
+  /* Pjesa përmbyllëse */
+  #closing {
+    background: var(--ivory);
+    padding: 40px 24px 80px 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
   }
 
   /* MUSIC TOGGLE */
@@ -252,7 +276,7 @@
   footer{
     text-align:center; padding:30px;
     font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
-    color:var(--sage); background:var(--ivory);
+    color:var(--sage); background:var(--wine); color: var(--ivory);
   }
 </style>
 </head>
@@ -266,17 +290,15 @@
       <path d="M20 80 C 20 40, 50 10, 80 10 C 80 50, 50 80, 20 80 Z" fill="none" stroke="#7C8A6E" stroke-width="0.5"/>
       <path d="M80 10 C 60 30, 40 50, 20 80" fill="none" stroke="#7C8A6E" stroke-width="0.5"/>
     </svg>
-    <!-- Inicialet (Ndryshoni N me shkronjën e Nuses) -->
+    <!-- Inicialet (Ndrysho N me shkronjën e parë të nuses) -->
     <span>S&N</span>
   </div>
   <div class="welcome-text">Prek për të hapur</div>
 </div>
 
-<!-- KETU VENDOS LINKUN E MUZIKES MP3 -->
-<!-- p.sh: src="muzika.mp3" -->
+<!-- LINKU I MUZIKES -->
 <audio id="bg-audio" loop src=""></audio>
-
-<button id="music-toggle" aria-label="Aktivizo/çaktivizo muzikën">♪</button>
+<button id="music-toggle" aria-label="Aktivizo muzikën">♪</button>
 
 <section id="hero" class="section">
   <!-- Sfondi abstrakt -->
@@ -295,10 +317,18 @@
     </g>
   </svg>
   
-  <div class="eyebrow">Ne po martohemi</div>
+  <div class="eyebrow">Ftesë Dasme</div>
   
-  <!-- EMRAT E ÇIFTIT -->
-  <h1 class="names">Shefik<span class="amp">&</span>[Emri i Nuses]</h1>
+  <!-- EMRAT E ÇIFTIT ME KALIGRAFI -->
+  <h1 class="names">Shefik &amp; [Emri]</h1>
+  
+  <!-- FAMILJET -->
+  <div class="families">Familja Memedi &nbsp;&middot;&nbsp; Familja [Mbiemri]</div>
+  
+  <!-- TEKSTI I FTESËS -->
+  <p class="invite-text">
+    Kemi nderin dhe kënaqësinë që t'ju ftojmë të ndani me ne gëzimin e martesës së fëmijëve tanë.
+  </p>
   
   <div class="divider"></div>
   <div class="date-line">20 SHTATOR 2026 · GOSTIVAR</div>
@@ -321,25 +351,20 @@
   <div class="day-time">E DIEL  |  ORA 17:00</div>
 </section>
 
-<!-- SEKSIONI I KURANIT & LUTJES -->
 <section id="quran-section">
-  <!-- Ajeti për Martesën (Surja En-Nebe' 78:8) -->
   <div class="arabic-text">وَخَلَقْنَاكُمْ أَزْوَاجًا</div>
   <p class="albanian-text">"Dhe Ne ju krijuam në çifte."</p>
   <div class="eyebrow" style="margin-top: 15px; color: var(--sage);">Kur'an, En-Nebe' 78:8</div>
 
-  <!-- Duaja (Lutja) -->
   <div class="dua-arabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
   <p class="albanian-text">"Allahu ju bekoftë, ju dhëntë bereqet dhe ju bashkoftë në çdo të mirë."</p>
 </section>
 
-<!-- SEKSIONI I TRADITAVE DHE ORAREVE -->
 <section id="details" class="section">
   <div class="eyebrow">Programi i Dasmës</div>
   <h2 style="font-family:'Italiana',serif; font-size:32px; color:var(--wine);">Vendi & Ora</h2>
   
   <div class="details-grid-3">
-    
     <!-- BOX 1: PETKAT -->
     <div class="frame">
       <div class="venue">Petkat</div>
@@ -360,7 +385,7 @@
       </div>
     </div>
     
-    <!-- BOX 3: BANKETI (Me butonin e hartës) -->
+    <!-- BOX 3: BANKETI -->
     <div class="frame">
       <div class="venue">Banketi</div>
       <div class="venue-sub">
@@ -368,14 +393,19 @@
         <strong>Ora 20:00</strong><br>
         Restorant "Shembull", Gostivar
       </div>
-      <!-- Vetëm ky boks ka hartën -->
       <a class="map-link" href="https://maps.google.com" target="_blank" rel="noopener">SHIKO HARTËN →</a>
     </div>
-
   </div>
 </section>
 
-<footer>ME DASHURI, SHEFIK & [EMRI] · 2026</footer>
+<!-- TEKSTI PËRMBYLLËS -->
+<section id="closing">
+  <p class="invite-text" style="max-width: 750px; font-size: 26px;">
+    Prania juaj do të jetë bekim për çiftin e ri dhe nder dhe gëzim për familjet Memedi &amp; [Mbiemri i Nuses].
+  </p>
+</section>
+
+<footer>ME DASHURI, SHEFIK &amp; [EMRI] · 2026</footer>
 
 <script>
   const audio = document.getElementById('bg-audio');
@@ -383,13 +413,10 @@
   const welcomeScreen = document.getElementById('welcome-screen');
   let playing = false;
 
-  // Kur klikon ekranin "Prek për të hapur"
   welcomeScreen.addEventListener('click', () => {
-    // Fshih ekranin dhe lejo scroll-in
     welcomeScreen.classList.add('hidden');
     document.body.classList.remove('locked');
 
-    // Provo të nisësh muzikën automatikisht nëse ka një link
     if(audio.src && audio.getAttribute('src') !== "") {
       audio.play().then(() => {
         playing = true;
@@ -400,7 +427,6 @@
     }
   });
 
-  // Butoni anësor për të ndalur/nisur muzikën manualisht
   musicBtn.addEventListener('click', () => {
     if(!audio.src || audio.getAttribute('src') === ""){
       musicBtn.textContent = '✕';
