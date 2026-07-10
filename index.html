@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eda & Ardit — Ftesë Dasme</title>
+<title>Shefik & Nusja — Ftesë Dasme</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Tenor+Sans&family=Italiana&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -23,7 +23,7 @@
     overflow-x:hidden;
   }
   
-  /* Për të bllokuar scroll-in derisa të hapet ftesa */
+  /* Bllokon scroll-in derisa të hapet ftesa */
   body.locked { overflow: hidden; }
 
   .section{
@@ -48,13 +48,14 @@
   
   .frame{
     border:1px solid var(--gold);
-    padding:50px 36px;
+    padding:40px 26px;
     width:100%;
     position:relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: rgba(250, 245, 236, 0.5);
   }
   .frame::before, .frame::after{
     content:"";
@@ -65,12 +66,12 @@
   .frame::before{ top:-8px; left:-8px; border-right:none; border-bottom:none; }
   .frame::after{ bottom:-8px; right:-8px; border-left:none; border-top:none; }
 
-  /* OVERLAY: PREK PËR TË HAPUR */
+  /* OVERLAY: PREK PËR TË HAPUR (Dizajn i ri "Fresh") */
   #welcome-screen {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: var(--ivory);
+    background: #F4EFE6;
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -83,50 +84,44 @@
     opacity: 0;
     visibility: hidden;
   }
-  .seal-container {
+  .fresh-circle {
     position: relative;
-    width: 140px; height: 140px;
-    margin-bottom: 30px;
-    animation: pulse 2s infinite ease-in-out;
-  }
-  .seal-leaf {
-    position: absolute;
-    width: 100%; height: 100%;
-    z-index: 1;
-    opacity: 0.8;
-  }
-  .wax-seal {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90px; height: 90px;
-    background: var(--wine);
+    width: 150px; height: 150px;
+    border: 1px solid var(--gold);
     border-radius: 50%;
-    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 4px 10px rgba(0,0,0,0.3);
-    border: 3px solid #505c48;
+    margin-bottom: 40px;
+    animation: float 3s ease-in-out infinite;
+    background: white;
+    box-shadow: 0 10px 30px rgba(176,141,87,0.15);
   }
-  .wax-seal span {
+  .fresh-circle span {
     font-family: 'Italiana', serif;
-    color: var(--gold);
-    font-size: 32px;
+    color: var(--wine);
+    font-size: 42px;
     letter-spacing: 2px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  }
+  .fresh-leaf {
+    position: absolute;
+    width: 180px; height: 180px;
+    pointer-events: none;
+    opacity: 0.6;
+    transform: rotate(15deg);
   }
   .welcome-text {
     font-family: 'Tenor Sans', sans-serif;
-    letter-spacing: 4px;
-    font-size: 13px;
-    color: var(--sage);
+    letter-spacing: 5px;
+    font-size: 14px;
+    color: var(--wine);
     text-transform: uppercase;
+    opacity: 0.8;
   }
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
   }
 
   /* HERO */
@@ -140,14 +135,14 @@
     width:100%;
     height:100%;
     z-index:0;
-    opacity:0.16;
+    opacity:0.12;
     pointer-events:none;
   }
   #hero > *:not(.hero-art){ position:relative; z-index:1; }
   .names{
     font-family:'Italiana', serif;
-    font-size:clamp(48px, 10vw, 96px);
-    line-height:1;
+    font-size:clamp(48px, 9vw, 86px);
+    line-height:1.1;
     color:var(--wine);
     letter-spacing:2px;
   }
@@ -161,7 +156,7 @@
   }
   .date-line{
     margin-top:24px;
-    font-size:20px;
+    font-size:18px;
     letter-spacing:3px;
     font-family:'Tenor Sans', sans-serif;
     color:var(--charcoal);
@@ -199,16 +194,15 @@
   }
   .arabic-text {
     font-family: 'Amiri', serif;
-    font-size: 32px;
+    font-size: 46px;
     color: var(--wine);
     direction: rtl;
-    line-height: 1.8;
-    max-width: 700px;
-    margin: 0 auto 20px auto;
+    line-height: 1.6;
+    margin: 0 auto 15px auto;
   }
   .albanian-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
+    font-size: 22px;
     font-style: italic;
     color: var(--charcoal);
     line-height: 1.5;
@@ -220,29 +214,27 @@
     font-size: 28px;
     color: var(--wine);
     direction: rtl;
-    margin: 40px auto 15px auto;
+    margin: 50px auto 15px auto;
     max-width: 700px;
   }
 
-  /* DETAILS */
-  .details-grid{
-    display:grid;
-    gap:40px;
-    margin-top:30px;
-    width:100%;
-    /* Këto rreshta e qendërzojnë përmbajtjen */
-    justify-content: center;
-    justify-items: center;
+  /* 3 BOKSET E TRADITËS (DETAILS) */
+  #details { background: #fdfaf5; }
+  .details-grid-3 {
+    display: grid;
+    gap: 30px;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 1000px;
   }
-  @media(min-width:640px){
-    .details-grid{ 
-      grid-template-columns: repeat(2, minmax(280px, 420px)); 
-    }
+  /* Në kompjuter bëhen 3 shtylla, në telefon rreshtohen njëra nën tjetrën */
+  @media(min-width: 900px){
+    .details-grid-3 { grid-template-columns: repeat(3, 1fr); }
   }
-  .venue{ font-family:'Italiana', serif; font-size:26px; color:var(--wine); margin-bottom:6px;}
-  .venue-sub{ font-size:17px; color:var(--charcoal); opacity:.8; }
+  .venue{ font-family:'Italiana', serif; font-size:26px; color:var(--wine); margin-bottom:10px;}
+  .venue-sub{ font-size:17px; color:var(--charcoal); opacity:.8; line-height: 1.5;}
   .map-link{
-    display:inline-block; margin-top:14px;
+    display:inline-block; margin-top:16px;
     font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
     color:var(--sage); text-decoration:none;
     border-bottom:1px solid var(--sage); padding-bottom:2px;
@@ -258,7 +250,7 @@
   }
 
   footer{
-    text-align:center; padding:26px;
+    text-align:center; padding:30px;
     font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
     color:var(--sage); background:var(--ivory);
   }
@@ -266,25 +258,28 @@
 </head>
 <body class="locked">
 
+<!-- OVERLAY: PREK PËR TË HAPUR -->
 <div id="welcome-screen">
-  <div class="seal-container">
-    <svg class="seal-leaf" viewBox="0 0 100 100">
-      <path d="M50 10 C60 30 80 40 50 90 C20 40 40 30 50 10 Z" fill="#7C8A6E" opacity="0.4"/>
-      <path d="M20 30 C40 40 50 60 50 90 C10 60 10 40 20 30 Z" fill="#7C8A6E" opacity="0.3"/>
-      <path d="M80 30 C60 40 50 60 50 90 C90 60 90 40 80 30 Z" fill="#7C8A6E" opacity="0.3"/>
+  <div class="fresh-circle">
+    <!-- Gjethe botanike e thjeshtë SVG -->
+    <svg class="fresh-leaf" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 80 C 20 40, 50 10, 80 10 C 80 50, 50 80, 20 80 Z" fill="none" stroke="#7C8A6E" stroke-width="0.5"/>
+      <path d="M80 10 C 60 30, 40 50, 20 80" fill="none" stroke="#7C8A6E" stroke-width="0.5"/>
     </svg>
-    <div class="wax-seal">
-      <span>E&A</span>
-    </div>
+    <!-- Inicialet (Ndryshoni N me shkronjën e Nuses) -->
+    <span>S&N</span>
   </div>
   <div class="welcome-text">Prek për të hapur</div>
 </div>
 
+<!-- KETU VENDOS LINKUN E MUZIKES MP3 -->
+<!-- p.sh: src="muzika.mp3" -->
 <audio id="bg-audio" loop src=""></audio>
 
 <button id="music-toggle" aria-label="Aktivizo/çaktivizo muzikën">♪</button>
 
 <section id="hero" class="section">
+  <!-- Sfondi abstrakt -->
   <svg class="hero-art" viewBox="0 0 800 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <g fill="none" stroke="#3E4A38" stroke-width="1.4">
       <circle cx="330" cy="470" r="70"/>
@@ -293,23 +288,23 @@
       <ellipse cx="210" cy="540" rx="10" ry="22" transform="rotate(35 210 540)"/>
       <ellipse cx="235" cy="480" rx="9" ry="20" transform="rotate(20 235 480)"/>
       <ellipse cx="180" cy="600" rx="10" ry="22" transform="rotate(50 180 600)"/>
-      <ellipse cx="150" cy="680" rx="9" ry="20" transform="rotate(60 150 680)"/>
       <path d="M680 200 C640 260 650 340 600 400 C570 440 590 490 550 540"/>
       <ellipse cx="590" cy="360" rx="10" ry="22" transform="rotate(-35 590 360)"/>
       <ellipse cx="565" cy="420" rx="9" ry="20" transform="rotate(-20 565 420)"/>
-      <ellipse cx="620" cy="300" rx="10" ry="22" transform="rotate(-50 620 300)"/>
-      <ellipse cx="650" cy="230" rx="9" ry="20" transform="rotate(-60 650 230)"/>
       <circle cx="400" cy="470" r="140" stroke-width="0.8"/>
-      <circle cx="400" cy="470" r="180" stroke-width="0.5" opacity="0.6"/>
     </g>
   </svg>
+  
   <div class="eyebrow">Ne po martohemi</div>
-  <h1 class="names">Eda<span class="amp">&</span>Ardit</h1>
+  
+  <!-- EMRAT E ÇIFTIT -->
+  <h1 class="names">Shefik<span class="amp">&</span>[Emri i Nuses]</h1>
+  
   <div class="divider"></div>
-  <div class="date-line">20 SHTATOR 2026 · TIRANË</div>
+  <div class="date-line">20 SHTATOR 2026 · GOSTIVAR</div>
 </section>
 
-<section id="date-section" class="section" style="min-height: 60vh;">
+<section id="date-section" class="section" style="min-height: 50vh;">
   <div class="eyebrow">Data e Dasmës</div>
   <div class="big-date">
     <span class="num">20</span>
@@ -326,33 +321,61 @@
   <div class="day-time">E DIEL  |  ORA 17:00</div>
 </section>
 
+<!-- SEKSIONI I KURANIT & LUTJES -->
 <section id="quran-section">
-  <div class="arabic-text">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ</div>
-  <p class="albanian-text">"Dhe nga faktet e Tij është që për të mirën tuaj, Ai krijoi nga vetë lloji juaj palën, ashtu që të gjeni prehje tek ato dhe në mes jush krijoi dashuri dhe mëshirë."</p>
-  <div class="eyebrow" style="margin-top: 15px; color: var(--sage);">Kur'an 30:21</div>
+  <!-- Ajeti për Martesën (Surja En-Nebe' 78:8) -->
+  <div class="arabic-text">وَخَلَقْنَاكُمْ أَزْوَاجًا</div>
+  <p class="albanian-text">"Dhe Ne ju krijuam në çifte."</p>
+  <div class="eyebrow" style="margin-top: 15px; color: var(--sage);">Kur'an, En-Nebe' 78:8</div>
 
+  <!-- Duaja (Lutja) -->
   <div class="dua-arabic">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
   <p class="albanian-text">"Allahu ju bekoftë, ju dhëntë bereqet dhe ju bashkoftë në çdo të mirë."</p>
 </section>
 
+<!-- SEKSIONI I TRADITAVE DHE ORAREVE -->
 <section id="details" class="section">
-  <div class="eyebrow">Detajet</div>
+  <div class="eyebrow">Programi i Dasmës</div>
   <h2 style="font-family:'Italiana',serif; font-size:32px; color:var(--wine);">Vendi & Ora</h2>
-  <div class="details-grid">
+  
+  <div class="details-grid-3">
+    
+    <!-- BOX 1: PETKAT -->
     <div class="frame">
-      <div class="venue">Ceremonia</div>
-      <div class="venue-sub">Kisha / Xhamia Shembull<br>Ora 17:00<br>Rruga Shembull, Tiranë</div>
+      <div class="venue">Petkat</div>
+      <div class="venue-sub">
+        Dërgimi i dhuratave.<br><br>
+        <strong>Ora 12:00</strong><br>
+        Shtëpia e Nuses
+      </div>
+    </div>
+    
+    <!-- BOX 2: INGJE -->
+    <div class="frame">
+      <div class="venue">Ingje</div>
+      <div class="venue-sub">
+        Marrja e Nuses.<br><br>
+        <strong>Ora 15:30</strong><br>
+        Shtëpia e Nuses
+      </div>
+    </div>
+    
+    <!-- BOX 3: BANKETI (Me butonin e hartës) -->
+    <div class="frame">
+      <div class="venue">Banketi</div>
+      <div class="venue-sub">
+        Dasma Kryesore.<br><br>
+        <strong>Ora 20:00</strong><br>
+        Restorant "Shembull", Gostivar
+      </div>
+      <!-- Vetëm ky boks ka hartën -->
       <a class="map-link" href="https://maps.google.com" target="_blank" rel="noopener">SHIKO HARTËN →</a>
     </div>
-    <div class="frame">
-      <div class="venue">Pritja</div>
-      <div class="venue-sub">Salla e Dasmave "Shembull"<br>Ora 19:30<br>Bulevardi Shembull, Tiranë</div>
-      <a class="map-link" href="https://maps.google.com" target="_blank" rel="noopener">SHIKO HARTËN →</a>
-    </div>
+
   </div>
 </section>
 
-<footer>ME DASHURI, EDA & ARDIT · 2026</footer>
+<footer>ME DASHURI, SHEFIK & [EMRI] · 2026</footer>
 
 <script>
   const audio = document.getElementById('bg-audio');
@@ -370,9 +393,9 @@
     if(audio.src && audio.getAttribute('src') !== "") {
       audio.play().then(() => {
         playing = true;
-        musicBtn.textContent = '❚❚'; // Ikona Pause
+        musicBtn.textContent = '❚❚'; 
       }).catch(err => {
-        console.log("Muzika nuk mund të nisej automatikisht: ", err);
+        console.log("Muzika nuk mund të nisej: ", err);
       });
     }
   });
