@@ -9,10 +9,11 @@
 <style>
   :root{
     --ivory:#FAF5EC;
-    --wine:#4f5a3c; /* Ngjyra jeshile e errët si te vula e shokut */
+    --wine:#4f5a3c;
     --gold:#B08D57;
     --sage:#7C8A6E;
     --charcoal:#2E2A26;
+    --paper: #F2EFE9; /* Ngjyra e letrës luksoze */
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -25,219 +26,169 @@
   
   body.locked { overflow: hidden; }
 
-  .section{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:60px 24px;
-    position:relative;
-  }
-  
-  .eyebrow{
-    font-family:'Tenor Sans', sans-serif;
-    letter-spacing:6px;
-    font-size:12px;
-    color:var(--gold);
-    text-transform:uppercase;
-    margin-bottom:18px;
-  }
-  
-  .frame{
-    border:1px solid var(--gold);
-    padding:40px 26px;
-    width:100%;
-    position:relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: rgba(250, 245, 236, 0.5);
-  }
-  .frame::before, .frame::after{
-    content:"";
-    position:absolute;
-    width:22px; height:22px;
-    border:1px solid var(--gold);
-  }
-  .frame::before{ top:-8px; left:-8px; border-right:none; border-bottom:none; }
-  .frame::after{ bottom:-8px; right:-8px; border-left:none; border-top:none; }
-
-  /* OVERLAY I RI (SI I SHOKUT) */
+  /* -------------------------------------------
+     OVERLAY I RI: ZARFI LUKSOZ (EMBOSSED & PEARL)
+  --------------------------------------------- */
   #welcome-screen {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
-    background: radial-gradient(circle at center, #F4EFE6 0%, #E8DFCE 100%);
+    background: var(--paper);
     z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1s ease, visibility 1s ease;
+    perspective: 1500px; /* E nevojshme per efektin 3D te hapjes */
+    transition: opacity 0.8s ease, visibility 0.8s ease;
     cursor: pointer;
+    overflow: hidden;
   }
   #welcome-screen.hidden {
     opacity: 0;
     visibility: hidden;
   }
-  .seal-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-    animation: pulse 2.5s infinite ease-in-out;
-  }
-  .olive-branch-svg {
+
+  /* Pjesa e trupit te zarfit (ku jane shkronjat) */
+  .envelope-body {
     position: absolute;
-    width: 220px;
-    z-index: 1;
-    transform: rotate(15deg);
-    opacity: 0.85;
-  }
-  /* Vula e dyllit me efekt 3D */
-  .wax-seal-3d {
-    position: relative;
-    z-index: 2;
-    width: 130px; height: 130px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #728258, #4f5a3c);
-    box-shadow: 
-      inset 0 0 10px rgba(0,0,0,0.4),
-      inset 0 0 25px rgba(0,0,0,0.3),
-      5px 15px 25px rgba(0,0,0,0.3);
-    border: 2px solid #5d6b46;
+    inset: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
-  }
-  .wax-seal-3d span {
-    font-family: 'Great Vibes', cursive;
-    color: #2b3320; /* E gjelbër shumë e errët, si gropë në dyll */
-    font-size: 50px;
-    text-shadow: 1px 1px 1px rgba(255,255,255,0.2), -1px -1px 2px rgba(0,0,0,0.5);
-  }
-  .welcome-text {
-    font-family: 'Tenor Sans', sans-serif;
-    letter-spacing: 5px;
-    font-size: 14px;
-    color: #7b786c;
-    text-transform: uppercase;
-  }
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-    100% { transform: scale(1); }
+    align-items: center;
+    background: var(--paper);
+    z-index: 1;
   }
 
-  /* HERO */
+  /* Shkronjat e gdhendura (Embossed Effect fiks si ne foto) */
+  .embossed-initials {
+    font-family: 'Great Vibes', cursive;
+    font-size: 130px;
+    color: var(--paper); /* Ngjyra e njejte me sfondin */
+    /* Hija e bardhe lart-majtas dhe hija e erret poshte-djathtas krijon 3D */
+    text-shadow: -2px -2px 5px #FFFFFF, 3px 3px 6px #C8BFA9;
+    margin-bottom: 5vh;
+  }
+
+  /* Kapaku i zarfit (Flap) */
+  .envelope-flap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 45vh; /* Zë 45% te ekranit lart */
+    transform-origin: top;
+    z-index: 2;
+    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.12));
+  }
+  .envelope-flap.open {
+    /* Rrotullohet siper kur hapet */
+    transform: rotateX(150deg);
+  }
+  
+  .flap-svg {
+    width: 100%; height: 100%; display: block;
+  }
+
+  /* Perla klasike */
+  .pearl {
+    position: absolute;
+    bottom: -8px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    /* Gradient per t'u dukur si sfere e vertete */
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #fae8d4 30%, #c4b095 85%, #fff 100%);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2), inset -2px -2px 4px rgba(0,0,0,0.1);
+    z-index: 3;
+    transition: opacity 0.3s;
+  }
+  /* Perla zhduket pak kur hapet kapaku */
+  .envelope-flap.open .pearl { opacity: 0; }
+
+  .welcome-hint {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Tenor Sans', sans-serif;
+    letter-spacing: 5px;
+    font-size: 13px;
+    color: #a39c90;
+    text-transform: uppercase;
+    z-index: 3;
+    animation: pulse-hint 2s infinite ease-in-out;
+  }
+  @keyframes pulse-hint { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
+
+
+  /* -------------------------------------------
+     FTESA KRYESORE 
+  --------------------------------------------- */
+  .section{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; text-align:center; padding:60px 24px; position:relative;
+  }
+  .eyebrow{
+    font-family:'Tenor Sans', sans-serif; letter-spacing:6px; font-size:12px;
+    color:var(--gold); text-transform:uppercase; margin-bottom:18px;
+  }
+  .frame{
+    border:1px solid var(--gold); padding:40px 26px; width:100%; position:relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(250, 245, 236, 0.5);
+  }
+  .frame::before, .frame::after{
+    content:""; position:absolute; width:22px; height:22px; border:1px solid var(--gold);
+  }
+  .frame::before{ top:-8px; left:-8px; border-right:none; border-bottom:none; }
+  .frame::after{ bottom:-8px; right:-8px; border-left:none; border-top:none; }
+
   #hero{
     background: radial-gradient(ellipse at top, rgba(176,141,87,0.08), transparent 60%), var(--ivory);
     overflow:hidden;
   }
   .hero-art{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-    opacity:0.12;
-    pointer-events:none;
+    position:absolute; inset:0; width:100%; height:100%; z-index:0; opacity:0.12; pointer-events:none;
   }
   #hero > *:not(.hero-art){ position:relative; z-index:1; }
   
   .names{
-    font-family:'Great Vibes', cursive;
-    font-size:clamp(65px, 14vw, 120px);
-    line-height:1.1;
-    color:var(--wine);
-    font-weight: 400;
-    margin: 10px 0 30px 0;
+    font-family:'Great Vibes', cursive; font-size:clamp(65px, 14vw, 120px);
+    line-height:1.1; color:var(--wine); font-weight: 400; margin: 10px 0 30px 0;
   }
-  
   .families {
-    font-family: 'Tenor Sans', sans-serif;
-    font-size: 13px;
-    letter-spacing: 4px;
-    color: var(--wine);
-    text-transform: uppercase;
-    margin-bottom: 20px;
+    font-family: 'Tenor Sans', sans-serif; font-size: 13px; letter-spacing: 4px;
+    color: var(--wine); text-transform: uppercase; margin-bottom: 20px;
   }
-  
   .invite-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    font-style: italic;
-    color: var(--charcoal);
-    max-width: 650px;
-    margin: 0 auto;
-    line-height: 1.5;
+    font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic;
+    color: var(--charcoal); max-width: 650px; margin: 0 auto; line-height: 1.5;
   }
-
   .date-line{
-    margin-top:30px;
-    font-size:18px;
-    letter-spacing:3px;
-    font-family:'Tenor Sans', sans-serif;
-    color:var(--charcoal);
+    margin-top:30px; font-size:18px; letter-spacing:3px; font-family:'Tenor Sans', sans-serif; color:var(--charcoal);
   }
   .divider{
-    width:60px; height:1px;
-    background:var(--gold);
-    margin:26px auto;
+    width:60px; height:1px; background:var(--gold); margin:26px auto;
   }
 
-  /* DATE DISPLAY */
   #date-section{ background:var(--wine); color:var(--ivory); }
   #date-section .eyebrow{ color:var(--gold); }
-  .big-date{
-    display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:baseline; margin-top:20px;
-  }
+  .big-date{ display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:baseline; margin-top:20px; }
   .big-date .num{ font-family:'Italiana', serif; font-size:56px; color:var(--gold); }
   .big-date .sep{ font-family:'Italiana', serif; font-size:40px; color:var(--gold); opacity:.6; }
   .date-labels{ display:flex; gap:44px; justify-content:center; margin-top:8px; }
   .date-labels span{ font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px; opacity:.75; width:70px; text-align:center; }
   .day-time{ margin-top:30px; font-family:'Tenor Sans', sans-serif; font-size:13px; letter-spacing:2px; opacity:.85; }
 
-  /* QURAN SECTION */
-  #quran-section {
-    background: var(--ivory);
-    padding: 80px 24px;
-    text-align: center;
-  }
-  .arabic-text {
-    font-family: 'Amiri', serif; font-size: 46px; color: var(--wine); direction: rtl; line-height: 1.6; margin: 0 auto 15px auto;
-  }
-  .albanian-text {
-    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--charcoal); line-height: 1.5; max-width: 600px; margin: 0 auto;
-  }
-  .dua-arabic {
-    font-family: 'Amiri', serif; font-size: 28px; color: var(--wine); direction: rtl; margin: 50px auto 15px auto; max-width: 700px;
-  }
+  #quran-section { background: var(--ivory); padding: 80px 24px; text-align: center; }
+  .arabic-text { font-family: 'Amiri', serif; font-size: 46px; color: var(--wine); direction: rtl; line-height: 1.6; margin: 0 auto 15px auto; }
+  .albanian-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--charcoal); line-height: 1.5; max-width: 600px; margin: 0 auto; }
+  .dua-arabic { font-family: 'Amiri', serif; font-size: 28px; color: var(--wine); direction: rtl; margin: 50px auto 15px auto; max-width: 700px; }
 
-  /* RREGULLIMI I RI I KUTIVE (2 lart, Banketi në qendër) */
   #details { background: #fdfaf5; }
-  .details-grid {
-    display: grid;
-    gap: 30px;
-    margin-top: 40px;
-    width: 100%;
-    max-width: 800px;
-  }
+  .details-grid { display: grid; gap: 30px; margin-top: 40px; width: 100%; max-width: 800px; }
   
-  /* Për ekrane më të mëdha se telefoni (Tablet / Desktop) */
   @media(min-width: 768px){
-    .details-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .banketi-box {
-      grid-column: 1 / -1; /* E shtrin në të dyja kolonat */
-      max-width: 600px;    /* E mban madhësinë perfekte në qendër */
-      margin: 0 auto;      /* E qendërzon */
-    }
+    .details-grid { grid-template-columns: 1fr 1fr; }
+    .banketi-box { grid-column: 1 / -1; max-width: 600px; margin: 0 auto; }
   }
 
   .venue{ font-family:'Italiana', serif; font-size:26px; color:var(--wine); margin-bottom:10px;}
@@ -255,38 +206,36 @@
     z-index:50; display:flex; align-items:center; justify-content:center;
   }
 
-  footer{
-    text-align:center; padding:30px; font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px;
-    background:var(--wine); color: var(--ivory);
-  }
+  footer{ text-align:center; padding:30px; font-family:'Tenor Sans', sans-serif; font-size:11px; letter-spacing:2px; background:var(--wine); color: var(--ivory); }
 </style>
 </head>
 <body class="locked">
 
-<!-- OVERLAY: PREK PËR TË HAPUR -->
+<!-- OVERLAY I RI: ZARFI LUKSOZ -->
 <div id="welcome-screen">
-  <div class="seal-container">
-    <!-- Dega e ullirit -->
-    <svg class="olive-branch-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 40 160 Q 100 100 160 40" fill="none" stroke="#7C8A6E" stroke-width="2"/>
-      <path d="M 160 40 Q 140 60 145 80 Q 165 70 160 40 Z" fill="#7C8A6E"/>
-      <path d="M 130 70 Q 110 80 115 100 Q 135 90 130 70 Z" fill="#7C8A6E"/>
-      <path d="M 100 100 Q 80 110 85 130 Q 105 120 100 100 Z" fill="#7C8A6E"/>
-      <path d="M 140 50 Q 150 40 170 45 Q 160 60 140 50 Z" fill="#93a384"/>
-      <path d="M 110 80 Q 120 70 140 75 Q 130 90 110 80 Z" fill="#93a384"/>
-      <path d="M 80 110 Q 90 100 110 105 Q 100 120 80 110 Z" fill="#93a384"/>
-    </svg>
-    <!-- Vula me 3D efekt -->
-    <div class="wax-seal-3d">
-      <span>S&N</span>
-    </div>
+  
+  <!-- Sfondi (Truri i Zarfit) me shkronjat e shtypura -->
+  <div class="envelope-body">
+    <div class="embossed-initials">S &amp; N</div>
   </div>
-  <div class="welcome-text">Prek për të hapur</div>
+
+  <!-- Kapaku qe hapet -->
+  <div class="envelope-flap" id="flap">
+    <!-- Forma e kapakut te zarfit -->
+    <svg class="flap-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path d="M0 0 L100 0 L52 85 C51 88 49 88 48 85 L0 0 Z" fill="#F2EFE9" stroke="#E5DEC9" stroke-width="0.5"/>
+    </svg>
+    <!-- Perla ne mes -->
+    <div class="pearl"></div>
+  </div>
+
+  <div class="welcome-hint">Prek për të hapur</div>
 </div>
 
 <!-- LINKU I MUZIKES -->
 <audio id="bg-audio" loop src="muzika.mp3"></audio>
 <button id="music-toggle" aria-label="Aktivizo muzikën">♪</button>
+
 
 <section id="hero" class="section">
   <svg class="hero-art" viewBox="0 0 800 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -309,16 +258,16 @@
   <div class="families">Familja Memedi &nbsp;&middot;&nbsp; Familja [Mbiemri]</div>
   <p class="invite-text">Kemi nderin dhe kënaqësinë që t'ju ftojmë të ndani me ne gëzimin e martesës së fëmijëve tanë.</p>
   <div class="divider"></div>
-  <div class="date-line">20 KORRIK 2028 · GOSTIVAR</div>
+  <div class="date-line">20 SHTATOR 2026 · GOSTIVAR</div>
 </section>
 
 <section id="date-section" class="section" style="min-height: 50vh;">
   <div class="eyebrow">Data e Dasmës</div>
   <div class="big-date">
-    <span class="num">20</span><span class="sep">·</span><span class="num">07</span><span class="sep">·</span><span class="num">2028</span>
+    <span class="num">20</span><span class="sep">·</span><span class="num">09</span><span class="sep">·</span><span class="num">2026</span>
   </div>
   <div class="date-labels"><span>DITA</span><span>MUAJI</span><span>VITI</span></div>
-  <div class="day-time">E DIEL  |  ORA 19:00</div>
+  <div class="day-time">E DIEL  |  ORA 17:00</div>
 </section>
 
 <section id="quran-section">
@@ -334,31 +283,20 @@
   <h2 style="font-family:'Italiana',serif; font-size:32px; color:var(--wine);">Vendi & Ora</h2>
   
   <div class="details-grid">
-    <!-- BOX 1: PETKAT (Lart - Majtas) -->
     <div class="frame">
-      <div class="venue">Petkat - 19.07.2028</div>
-      <div class="venue-sub">
-        <strong>Ora 12:00</strong><br>
-      </div>
+      <div class="venue">Petkat</div>
+      <div class="venue-sub">Dërgimi i dhuratave.<br><br><strong>Ora 12:00</strong><br>Shtëpia e Nuses</div>
     </div>
     
-    <!-- BOX 2: INGJE (Lart - Djathtas) -->
     <div class="frame">
-      <div class="venue">Ingje - 19.07.2028</div>
-      <div class="venue-sub">
-        <strong>Ora 15:30</strong><br>
-        Shtëpia e Nuses
-      </div>
+      <div class="venue">Ingje</div>
+      <div class="venue-sub">Marrja e Nuses.<br><br><strong>Ora 15:30</strong><br>Shtëpia e Nuses</div>
     </div>
     
-    <!-- BOX 3: BANKETI (Poshtë - Në qendër, zë gjithë gjerësinë) -->
     <div class="frame banketi-box">
-      <div class="venue">Banketi - 20.07.2028</div>
-      <div class="venue-sub">
-        <strong>Ora 19:00</strong><br>
-        Restorant "Mont Blanc", Gostivar
-      </div>
-      <a class="map-link" href="https://www.google.com/maps/place/Mont+Blanc/@41.796055,20.8818169,741m/data=!3m2!1e3!4b1!4m6!3m5!1s0x135159c165c81435:0xd7e6a81f76700144!8m2!3d41.796051!4d20.8843918!16s%2Fg%2F1tfhvz71?entry=ttu&g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">SHIKO HARTËN →</a>
+      <div class="venue">Banketi</div>
+      <div class="venue-sub">Dasma Kryesore.<br><br><strong>Ora 20:00</strong><br>Restorant "Shembull", Gostivar</div>
+      <a class="map-link" href="https://maps.google.com" target="_blank" rel="noopener">SHIKO HARTËN →</a>
     </div>
   </div>
 </section>
@@ -369,7 +307,7 @@
   </p>
 </section>
 
-<footer>ME DASHURI, SHEFIK &amp; [EMRI] · 2028</footer>
+<footer>ME DASHURI, SHEFIK &amp; [EMRI] · 2026</footer>
 
 <script>
   const audio = document.getElementById('bg-audio');
@@ -378,17 +316,25 @@
   let playing = false;
 
   welcomeScreen.addEventListener('click', () => {
-    welcomeScreen.classList.add('hidden');
-    document.body.classList.remove('locked');
+    // 1. Fillimisht hap kapakun e zarfit
+    const flap = document.getElementById('flap');
+    flap.classList.add('open');
 
-    if(audio.src && audio.getAttribute('src') !== "") {
-      audio.play().then(() => {
-        playing = true;
-        musicBtn.textContent = '❚❚'; 
-      }).catch(err => {
-        console.log("Muzika nuk mund të nisej: ", err);
-      });
-    }
+    // 2. Prit 800 milisekonda qe te behet animacioni, pastaj fshih zarfin
+    setTimeout(() => {
+      welcomeScreen.classList.add('hidden');
+      document.body.classList.remove('locked');
+
+      // 3. Nis muziken kur te shfaqet ftesa
+      if(audio.src && audio.getAttribute('src') !== "") {
+        audio.play().then(() => {
+          playing = true;
+          musicBtn.textContent = '❚❚'; 
+        }).catch(err => {
+          console.log("Muzika nuk mund të nisej: ", err);
+        });
+      }
+    }, 800); 
   });
 
   musicBtn.addEventListener('click', () => {
@@ -397,11 +343,9 @@
       return; 
     }
     if(playing){ 
-      audio.pause(); 
-      musicBtn.textContent = '♪'; 
+      audio.pause(); musicBtn.textContent = '♪'; 
     } else { 
-      audio.play(); 
-      musicBtn.textContent = '❚❚'; 
+      audio.play(); musicBtn.textContent = '❚❚'; 
     }
     playing = !playing;
   });
