@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kanagjegji i Vlerës</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ruby: #3A0510; /* E kuqe e thellë luksoze */
+    --ruby-light: #660B1E;
+    --gold: #D4AF37;
+    --gold-glow: rgba(212, 175, 55, 0.6);
+    --white: #FFFFFF;
+    --glass: rgba(255, 255, 255, 0.05);
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background-color: var(--ruby);
+    background-image: radial-gradient(circle at top, var(--ruby-light) 0%, var(--ruby) 80%);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body.locked { overflow: hidden; height: 100vh; }
+
+  /* =========================================
+     HYRJA MAGJIKE (VELVET & GOLD RIPPLE)
+  ========================================= */
+  #intro-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: var(--ruby);
+    background-image: radial-gradient(circle, var(--ruby-light) 0%, var(--ruby) 100%);
+    z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  
+  .magical-btn {
+    position: relative; width: 90px; height: 90px;
+    border-radius: 50%; background: transparent;
+    border: 2px solid var(--gold);
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; z-index: 10;
+    animation: heartbeat 2s infinite;
+  }
+  .magical-btn::before {
+    content: ''; position: absolute; width: 50px; height: 50px;
+    background: var(--gold); border-radius: 50%;
+    box-shadow: 0 0 30px var(--gold);
+  }
+  .intro-text {
+    margin-top: 40px; font-family: 'Cinzel', serif; font-size: 13px;
+    letter-spacing: 6px; color: var(--gold); text-transform: uppercase;
+    animation: fadePulse 2s infinite;
+  }
+
+  /* Efekti i valës së floririt që pushton ekranin */
+  .gold-ripple {
+    position: fixed; top: 50%; left: 50%; width: 10px; height: 10px;
+    background: var(--gold); border-radius: 50%; transform: translate(-50%, -50%) scale(0);
+    z-index: 10000; pointer-events: none; transition: transform 1s ease-in-out, opacity 1s ease;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--gold-glow); }
+    50% { transform: scale(1.15); box-shadow: 0 0 50px var(--gold-glow); }
+  }
+  @keyframes fadePulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+  /* =========================================
+     PETALET E TRËNDAFILIT NË RRËNIE
+  ========================================= */
+  .petal {
+    position: fixed; top: -10%; z-index: 1;
+    width: 25px; height: 25px; background: #990F26;
+    border-radius: 15px 0 15px 0;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
+    opacity: 0; animation: fall linear infinite;
+    pointer-events: none;
+  }
+  @keyframes fall {
+    0% { opacity: 0; transform: translateY(0) rotate(0deg) scale(0.5); }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(110vh) rotate(360deg) scale(1); }
+  }
+
+  /* =========================================
+     TRUPI I FTESËS (GLASS & GOLD)
+  ========================================= */
+  #main-content {
+    opacity: 0; visibility: hidden; transition: opacity 1.5s ease;
+    padding: 60px 20px; display: flex; flex-direction: column; align-items: center;
+    position: relative; z-index: 5;
+  }
+  #main-content.show { opacity: 1; visibility: visible; }
+
+  .glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 15px; padding: 60px 30px;
+    max-width: 550px; width: 100%; text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    position: relative; overflow: hidden;
+  }
+  .glass-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* Animacionet kaskadë (Zbulimi) */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 5px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 20px;
+  }
+  .name {
+    font-family: 'Great Vibes', cursive; font-size: clamp(80px, 16vw, 120px);
+    color: var(--white); margin: 10px 0 30px 0; line-height: 1;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 30px rgba(212, 175, 55, 0.4);
+  }
+  .story-text {
+    font-family: 'Playfair Display', serif; font-size: 18px; font-style: italic; line-height: 1.6;
+    color: rgba(255,255,255,0.9); margin-bottom: 30px;
+  }
+  .divider {
+    width: 80px; height: 1px; background: var(--gold);
+    margin: 0 auto 30px auto; opacity: 0.6;
+  }
+
+  /* Kalendari Miniaturë */
+  .date-highlight {
+    font-family: 'Cinzel', serif; font-size: 26px; color: var(--gold);
+    letter-spacing: 3px; margin-bottom: 5px; font-weight: 600;
+  }
+  .time-loc {
+    font-size: 13px; letter-spacing: 2px; color: var(--white);
+    text-transform: uppercase; margin-bottom: 40px; font-weight: 300;
+  }
+
+  /* Countdown Luksoz */
+  .countdown { display: flex; justify-content: center; gap: 15px; margin-top: 40px; }
+  .cd-box {
+    background: rgba(0,0,0,0.3); border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px; width: 70px; padding: 15px 0;
+  }
+  .cd-num { font-family: 'Cinzel', serif; font-size: 24px; color: var(--gold); display: block;}
+  .cd-label { font-size: 9px; letter-spacing: 2px; color: var(--white); text-transform: uppercase; margin-top: 5px; display: block;}
+
+  /* Formulari i Konfirmimit */
+  .rsvp-container { margin-top: 50px; text-align: left; border-top: 1px dashed rgba(212,175,55,0.3); padding-top: 40px;}
+  .rsvp-title { font-family: 'Cinzel', serif; font-size: 20px; color: var(--gold); text-align: center; margin-bottom: 25px; }
+  .input-field {
+    width: 100%; padding: 15px; border-radius: 5px; margin-bottom: 15px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--white); font-family: 'Montserrat', sans-serif;
+  }
+  .btn-submit {
+    width: 100%; padding: 15px; background: var(--gold); border: none;
+    color: var(--ruby); font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600;
+    letter-spacing: 2px; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+  }
+  .btn-submit:hover { background: var(--white); box-shadow: 0 0 20px var(--gold-glow); }
+
+  /* Butoni i Muzikës që rrotullohet si disk */
+  #music-toggle{
+    position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; border-radius: 50%;
+    background: var(--ruby); border: 2px solid var(--gold); color: var(--gold); font-size: 22px; 
+    cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+  }
+  .spin { animation: spinRecord 4s linear infinite; }
+  @keyframes spinRecord { 100% { transform: rotate(360deg); } }
+
+</style>
+</head>
+<body class="locked">
+
+<div class="gold-ripple" id="ripple"></div>
+
+<div id="intro-screen">
+  <div class="magical-btn" id="start-btn"></div>
+  <div class="intro-text">Zbuloni Magjinë</div>
+</div>
+
+<audio id="bg-audio" loop src="muzika.mp3"></audio>
+<button id="music-toggle" aria-label="Luaj muzikën">♪</button>
+
+<div id="main-content">
+  
+  <div class="glass-card">
+    <div class="eyebrow reveal">Kanagjegj</div>
+    <div class="name reveal">Vlera</div>
+    
+    <p class="story-text reveal">
+      "Ju ftojmë të jeni pjesë e një nate magjike, <br>të mbushur me traditë, muzikë dhe shumë dashuri."
+    </p>
+    
+    <div class="divider reveal"></div>
+    
+    <div class="date-highlight reveal">20 Gusht 2027</div>
+    <div class="time-loc reveal">E Premte  |  Ora 18:00  |  Grand Resort</div>
+    
+    <p class="story-text reveal" style="font-size: 15px; color: var(--gold);">Atmosfera nga: Shkurte Fejza</p>
+
+    <div class="countdown reveal">
+      <div class="cd-box"><span class="cd-num" id="days">00</span><span class="cd-label">Ditë</span></div>
+      <div class="cd-box"><span class="cd-num" id="hours">00</span><span class="cd-label">Orë</span></div>
+      <div class="cd-box"><span class="cd-num" id="mins">00</span><span class="cd-label">Min</span></div>
+      <div class="cd-box"><span class="cd-num" id="secs">00</span><span class="cd-label">Sek</span></div>
+    </div>
+
+    <div class="rsvp-container reveal">
+      <div class="rsvp-title">Konfirmimi i Pjesëmarrjes</div>
+      <input type="text" class="input-field" placeholder="Emri dhe Mbiemri i të ftuarit...">
+      <button class="btn-submit">Konfirmo</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Krijimi i petaleve 3D (Bie nga qielli)
+  function createPetals() {
+    for(let i=0; i<15; i++) {
+      let petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      petal.style.animationDelay = (Math.random() * 5) + 's';
+      document.body.appendChild(petal);
+    }
+  }
+
+  const startBtn = document.getElementById('start-btn');
+  const introScreen = document.getElementById('intro-screen');
+  const ripple = document.getElementById('ripple');
+  const mainContent = document.getElementById('main-content');
+  const audio = document.getElementById('bg-audio');
+  const musicBtn = document.getElementById('music-toggle');
+  let playing = false;
+
+  startBtn.addEventListener('click', () => {
+    // 1. Zgjerohet vala e floririt
+    ripple.style.transform = 'translate(-50%, -50%) scale(300)';
+    
+    setTimeout(() => {
+      // 2. Fshihet hyrja
+      introScreen.style.display = 'none';
+      document.body.classList.remove('locked');
+      ripple.style.opacity = '0';
+      
+      // 3. Shfaqet ftesa
+      mainContent.classList.add('show');
+      
+      // 4. Nisin të bien petalet
+      createPetals();
+      
+      // 5. Shfaqen tekstet një nga një
+      document.querySelectorAll('.reveal').forEach((elem, index) => {
+        setTimeout(() => { elem.classList.add('active'); }, 400 + (index * 200));
+      });
+
+      // 6. Nis muzika
+      if(audio.src && audio.getAttribute('src') !== "") {
+        // audio.currentTime = 33; // <-- Hiq dy vizat para nese do qe te nise te sekonda 33
+        audio.play().then(() => {
+          playing = true;
+          musicBtn.innerHTML = '❚❚'; 
+          musicBtn.classList.add('spin');
+        }).catch(err => console.log(err));
+      }
+    }, 900); 
+  });
+
+  musicBtn.addEventListener('click', () => {
+    if(!audio.src || audio.getAttribute('src') === ""){
+      musicBtn.innerHTML = '✕'; return; 
+    }
+    if(playing){ 
+      audio.pause(); musicBtn.innerHTML = '♪'; musicBtn.classList.remove('spin');
+    } else { 
+      audio.play(); musicBtn.innerHTML = '❚❚'; musicBtn.classList.add('spin');
+    }
+    playing = !playing;
+  });
+
+  // Countdown
+  const countDownDate = new Date("Aug 20, 2027 18:00:00").getTime();
+  setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+    document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+    document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+    document.getElementById("mins").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+    document.getElementById("secs").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+  }, 1000);
+</script>
+
+</body>
+</html>
