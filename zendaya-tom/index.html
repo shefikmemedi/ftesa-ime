@@ -8,21 +8,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --space: #030712; 
-    --space-light: #111827;
-    --silver: #E2E8F0;
-    --silver-glow: rgba(226, 232, 240, 0.5);
-    --white: #FFFFFF;
-    --glass-bg: rgba(255, 255, 255, 0.04);
-    --glass-border: rgba(226, 232, 240, 0.2);
+    --velvet-dark: #1a0205; /* E kuqe pothuajse e zezë për thellësi */
+    --velvet-light: #4a0813; /* E kuqe rubini / bordo e thellë */
+    --champagne: #D4AF37; /* Flori luksoz */
+    --champagne-glow: rgba(212, 175, 55, 0.5);
+    --white: #FDFBF7;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(212, 175, 55, 0.25);
   }
   
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   
   body {
-    background-color: var(--space);
-    background-image: radial-gradient(circle at top, var(--space-light) 0%, var(--space) 100%);
+    background-color: var(--velvet-dark);
+    background-image: radial-gradient(circle at top, var(--velvet-light) 0%, var(--velvet-dark) 100%),
+                      url('https://www.transparenttextures.com/patterns/stardust.png');
     color: var(--white);
     font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
@@ -31,59 +32,60 @@
   body.locked { overflow: hidden; height: 100vh; }
 
   /* =========================================
-     INTRO: SILVER MOONLIGHT RIPPLE
+     INTRO: GOLDEN RIPPLE
   ========================================= */
   #intro-screen {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: var(--space);
-    background-image: radial-gradient(circle, var(--space-light) 0%, var(--space) 100%);
+    background: var(--velvet-dark);
+    background-image: radial-gradient(circle, var(--velvet-light) 0%, var(--velvet-dark) 100%),
+                      url('https://www.transparenttextures.com/patterns/stardust.png');
     z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
   }
   
-  .moon-btn {
-    position: relative; width: 100px; height: 100px;
+  .gold-btn {
+    position: relative; width: 105px; height: 105px;
     border-radius: 50%; background: transparent;
-    border: 1px solid var(--silver);
+    border: 1px solid var(--champagne);
     display: flex; justify-content: center; align-items: center;
     cursor: pointer; z-index: 10;
     animation: breathe 2.5s infinite;
   }
-  .moon-btn::before {
-    content: ''; position: absolute; width: 60px; height: 60px;
-    background: var(--silver); border-radius: 50%;
-    box-shadow: 0 0 40px var(--white);
+  .gold-btn::before {
+    content: ''; position: absolute; width: 65px; height: 65px;
+    background: var(--champagne); border-radius: 50%;
+    box-shadow: 0 0 40px var(--champagne);
   }
   .intro-text {
     margin-top: 50px; font-family: 'Montserrat', sans-serif; font-size: 11px;
-    letter-spacing: 8px; color: var(--silver); text-transform: uppercase;
-    animation: fadePulse 2s infinite; font-weight: 300;
+    letter-spacing: 8px; color: var(--champagne); text-transform: uppercase;
+    animation: fadePulse 2s infinite; font-weight: 400; text-shadow: 0 0 10px rgba(212,175,55,0.4);
   }
 
-  .silver-ripple {
+  .gold-ripple {
     position: fixed; top: 50%; left: 50%; width: 10px; height: 10px;
-    background: var(--white); border-radius: 50%; transform: translate(-50%, -50%) scale(0);
+    background: var(--champagne); border-radius: 50%; transform: translate(-50%, -50%) scale(0);
     z-index: 10000; pointer-events: none; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
   }
 
   @keyframes breathe {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--silver-glow); }
-    50% { transform: scale(1.1); box-shadow: 0 0 50px var(--silver-glow); }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--champagne-glow); }
+    50% { transform: scale(1.1); box-shadow: 0 0 50px var(--champagne-glow); }
   }
-  @keyframes fadePulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+  @keyframes fadePulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
   /* =========================================
-     MAGICAL FIREFLIES (STARS)
+     MAGICAL GOLDEN SPARKS
   ========================================= */
-  .firefly {
+  .spark {
     position: fixed; bottom: -10px; z-index: 1;
-    width: 3px; height: 3px; background: var(--white);
-    border-radius: 50%; box-shadow: 0 0 10px 2px var(--white);
+    width: 4px; height: 4px; background: var(--champagne);
+    border-radius: 50%; box-shadow: 0 0 12px 2px var(--champagne);
     opacity: 0; animation: floatUp linear infinite; pointer-events: none;
   }
   @keyframes floatUp {
     0% { opacity: 0; transform: translateY(0) scale(0.5); }
-    20% { opacity: 0.8; }
-    80% { opacity: 0.8; }
+    20% { opacity: 0.7; }
+    80% { opacity: 0.7; }
     100% { opacity: 0; transform: translateY(-110vh) scale(1.2); }
   }
 
@@ -103,7 +105,7 @@
     border: 1px solid var(--glass-border);
     border-radius: 16px; padding: 70px 40px;
     max-width: 650px; width: 100%; text-align: center;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 20px rgba(212,175,55,0.05);
     margin-top: 60px; position: relative; overflow: hidden;
   }
 
@@ -112,24 +114,25 @@
 
   /* Section 1: Hero */
   .eyebrow {
-    font-size: 11px; letter-spacing: 6px; font-weight: 300;
-    color: var(--silver); text-transform: uppercase; margin-bottom: 25px;
+    font-size: 11px; letter-spacing: 6px; font-weight: 400;
+    color: var(--champagne); text-transform: uppercase; margin-bottom: 25px;
   }
   .name {
     font-family: 'Playfair Display', serif; font-size: clamp(50px, 10vw, 85px);
     color: var(--white); margin: 10px 0; line-height: 1.2; font-weight: 400;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
   }
   .and-symbol {
-    font-family: 'Playfair Display', serif; font-size: 40px; color: var(--silver);
+    font-family: 'Playfair Display', serif; font-size: 40px; color: var(--champagne);
     font-style: italic; display: block; margin: 10px 0;
   }
   .quote {
-    font-size: 14px; font-style: italic; line-height: 1.8; font-weight: 200;
-    color: rgba(255,255,255,0.8); margin-top: 30px; letter-spacing: 1px;
+    font-size: 14px; font-style: italic; line-height: 1.8; font-weight: 300;
+    color: rgba(255,255,255,0.85); margin-top: 30px; letter-spacing: 1px;
   }
   .divider {
-    width: 60px; height: 1px; background: var(--silver);
-    margin: 40px auto; opacity: 0.3;
+    width: 60px; height: 1px; background: var(--champagne);
+    margin: 40px auto; opacity: 0.5;
   }
 
   /* Section 2: Details */
@@ -138,31 +141,30 @@
     margin-bottom: 30px; letter-spacing: 2px; font-weight: 400;
   }
   .date-highlight {
-    font-family: 'Playfair Display', serif; font-size: 30px; color: var(--white);
+    font-family: 'Playfair Display', serif; font-size: 30px; color: var(--champagne);
     letter-spacing: 2px; margin-bottom: 10px; font-style: italic;
   }
   .time-loc {
-    font-size: 12px; letter-spacing: 4px; color: var(--silver);
+    font-size: 12px; letter-spacing: 4px; color: var(--white);
     text-transform: uppercase; margin-bottom: 40px; font-weight: 300; line-height: 2;
   }
 
   .map-btn {
     display: inline-block; padding: 16px 45px; border-radius: 4px;
-    background: transparent; border: 1px solid var(--silver);
-    color: var(--silver); text-decoration: none; font-size: 11px;
+    background: transparent; border: 1px solid var(--champagne);
+    color: var(--champagne); text-decoration: none; font-size: 11px;
     letter-spacing: 4px; transition: 0.4s; text-transform: uppercase;
   }
-  .map-btn:hover { background: var(--white); color: var(--space); box-shadow: 0 0 20px var(--silver-glow); }
+  .map-btn:hover { background: var(--champagne); color: var(--velvet-dark); box-shadow: 0 0 20px var(--champagne-glow); }
 
   /* Music Button */
   #music-toggle{
     position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; border-radius: 50%;
-    background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border); color: var(--white); font-size: 20px; 
+    background: var(--velvet-dark); border: 1px solid var(--champagne); color: var(--champagne); font-size: 20px; 
     cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: 0.3s;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.8); transition: 0.3s;
   }
-  #music-toggle:hover { background: var(--white); color: var(--space); }
+  #music-toggle:hover { background: var(--champagne); color: var(--velvet-dark); }
   .spin { animation: spinRecord 4s linear infinite; }
   @keyframes spinRecord { 100% { transform: rotate(360deg); } }
 
@@ -173,10 +175,10 @@
 </head>
 <body class="locked">
 
-<div class="silver-ripple" id="ripple"></div>
+<div class="gold-ripple" id="ripple"></div>
 
 <div id="intro-screen">
-  <div class="moon-btn" id="start-btn"></div>
+  <div class="gold-btn" id="start-btn"></div>
   <div class="intro-text">Tap to Unlock</div>
 </div>
 
@@ -212,15 +214,15 @@
 </div>
 
 <script>
-  function createFireflies() {
+  function createSparks() {
     const num = window.innerWidth < 600 ? 20 : 40; 
     for(let i=0; i<num; i++) {
-      let firefly = document.createElement('div');
-      firefly.className = 'firefly';
-      firefly.style.left = Math.random() * 100 + 'vw';
-      firefly.style.animationDuration = (Math.random() * 5 + 5) + 's';
-      firefly.style.animationDelay = (Math.random() * 5) + 's';
-      document.body.appendChild(firefly);
+      let spark = document.createElement('div');
+      spark.className = 'spark';
+      spark.style.left = Math.random() * 100 + 'vw';
+      spark.style.animationDuration = (Math.random() * 4 + 4) + 's';
+      spark.style.animationDelay = (Math.random() * 4) + 's';
+      document.body.appendChild(spark);
     }
   }
 
@@ -241,7 +243,7 @@
       ripple.style.opacity = '0';
       mainContent.classList.add('show');
       
-      createFireflies();
+      createSparks();
       checkReveal();
       
       if(audio.src && audio.getAttribute('src') !== "") {
