@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zendaya & Tom — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --space: #030712; 
+    --space-light: #111827;
+    --silver: #E2E8F0;
+    --silver-glow: rgba(226, 232, 240, 0.5);
+    --white: #FFFFFF;
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(226, 232, 240, 0.2);
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background-color: var(--space);
+    background-image: radial-gradient(circle at top, var(--space-light) 0%, var(--space) 100%);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body.locked { overflow: hidden; height: 100vh; }
+
+  /* =========================================
+     INTRO: SILVER MOONLIGHT RIPPLE
+  ========================================= */
+  #intro-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: var(--space);
+    background-image: radial-gradient(circle, var(--space-light) 0%, var(--space) 100%);
+    z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  
+  .moon-btn {
+    position: relative; width: 100px; height: 100px;
+    border-radius: 50%; background: transparent;
+    border: 1px solid var(--silver);
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; z-index: 10;
+    animation: breathe 2.5s infinite;
+  }
+  .moon-btn::before {
+    content: ''; position: absolute; width: 60px; height: 60px;
+    background: var(--silver); border-radius: 50%;
+    box-shadow: 0 0 40px var(--white);
+  }
+  .intro-text {
+    margin-top: 50px; font-family: 'Montserrat', sans-serif; font-size: 11px;
+    letter-spacing: 8px; color: var(--silver); text-transform: uppercase;
+    animation: fadePulse 2s infinite; font-weight: 300;
+  }
+
+  .silver-ripple {
+    position: fixed; top: 50%; left: 50%; width: 10px; height: 10px;
+    background: var(--white); border-radius: 50%; transform: translate(-50%, -50%) scale(0);
+    z-index: 10000; pointer-events: none; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px var(--silver-glow); }
+    50% { transform: scale(1.1); box-shadow: 0 0 50px var(--silver-glow); }
+  }
+  @keyframes fadePulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* =========================================
+     MAGICAL FIREFLIES (STARS)
+  ========================================= */
+  .firefly {
+    position: fixed; bottom: -10px; z-index: 1;
+    width: 3px; height: 3px; background: var(--white);
+    border-radius: 50%; box-shadow: 0 0 10px 2px var(--white);
+    opacity: 0; animation: floatUp linear infinite; pointer-events: none;
+  }
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(-110vh) scale(1.2); }
+  }
+
+  /* =========================================
+     MAIN CONTENT (FROSTED GLASS)
+  ========================================= */
+  #main-content {
+    opacity: 0; visibility: hidden; transition: opacity 1.5s ease;
+    padding: 0 20px 100px 20px; display: flex; flex-direction: column; align-items: center;
+    position: relative; z-index: 5;
+  }
+  #main-content.show { opacity: 1; visibility: visible; }
+
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px; padding: 70px 40px;
+    max-width: 650px; width: 100%; text-align: center;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
+    margin-top: 60px; position: relative; overflow: hidden;
+  }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* Section 1: Hero */
+  .eyebrow {
+    font-size: 11px; letter-spacing: 6px; font-weight: 300;
+    color: var(--silver); text-transform: uppercase; margin-bottom: 25px;
+  }
+  .name {
+    font-family: 'Playfair Display', serif; font-size: clamp(50px, 10vw, 85px);
+    color: var(--white); margin: 10px 0; line-height: 1.2; font-weight: 400;
+  }
+  .and-symbol {
+    font-family: 'Playfair Display', serif; font-size: 40px; color: var(--silver);
+    font-style: italic; display: block; margin: 10px 0;
+  }
+  .quote {
+    font-size: 14px; font-style: italic; line-height: 1.8; font-weight: 200;
+    color: rgba(255,255,255,0.8); margin-top: 30px; letter-spacing: 1px;
+  }
+  .divider {
+    width: 60px; height: 1px; background: var(--silver);
+    margin: 40px auto; opacity: 0.3;
+  }
+
+  /* Section 2: Details */
+  .section-title {
+    font-family: 'Playfair Display', serif; font-size: 24px; color: var(--white);
+    margin-bottom: 30px; letter-spacing: 2px; font-weight: 400;
+  }
+  .date-highlight {
+    font-family: 'Playfair Display', serif; font-size: 30px; color: var(--white);
+    letter-spacing: 2px; margin-bottom: 10px; font-style: italic;
+  }
+  .time-loc {
+    font-size: 12px; letter-spacing: 4px; color: var(--silver);
+    text-transform: uppercase; margin-bottom: 40px; font-weight: 300; line-height: 2;
+  }
+
+  .map-btn {
+    display: inline-block; padding: 16px 45px; border-radius: 4px;
+    background: transparent; border: 1px solid var(--silver);
+    color: var(--silver); text-decoration: none; font-size: 11px;
+    letter-spacing: 4px; transition: 0.4s; text-transform: uppercase;
+  }
+  .map-btn:hover { background: var(--white); color: var(--space); box-shadow: 0 0 20px var(--silver-glow); }
+
+  /* Music Button */
+  #music-toggle{
+    position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; border-radius: 50%;
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); color: var(--white); font-size: 20px; 
+    cursor: pointer; z-index: 50; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5); transition: 0.3s;
+  }
+  #music-toggle:hover { background: var(--white); color: var(--space); }
+  .spin { animation: spinRecord 4s linear infinite; }
+  @keyframes spinRecord { 100% { transform: rotate(360deg); } }
+
+  @media(max-width: 600px) {
+    .glass-panel { padding: 50px 20px; border-radius: 0; border-left: none; border-right: none; }
+  }
+</style>
+</head>
+<body class="locked">
+
+<div class="silver-ripple" id="ripple"></div>
+
+<div id="intro-screen">
+  <div class="moon-btn" id="start-btn"></div>
+  <div class="intro-text">Tap to Unlock</div>
+</div>
+
+<audio id="bg-audio" loop src="muzika.mp3"></audio>
+<button id="music-toggle" aria-label="Play Music">♪</button>
+
+<div id="main-content">
+  
+  <div class="glass-panel" style="margin-top: 80px;">
+    <div class="eyebrow reveal">You are joyfully invited to the wedding of</div>
+    <div class="name reveal">Zendaya</div>
+    <div class="and-symbol reveal">&</div>
+    <div class="name reveal">Tom</div>
+    
+    <div class="divider reveal"></div>
+    <p class="quote reveal">
+      "A love written in the stars, <br>meant to be celebrated with those we hold dearest."
+    </p>
+  </div>
+
+  <div class="glass-panel">
+    <div class="eyebrow reveal" style="margin-bottom: 20px;">The Details</div>
+    <div class="date-highlight reveal">September 12th, 2026</div>
+    <div class="time-loc reveal">Saturday Evening<br>Villa del Balbianello<br>Lake Como, Italy</div>
+    
+    <div class="divider reveal" style="width: 40px; margin: 30px auto;"></div>
+    
+    <div class="reveal">
+      <a href="https://maps.google.com" target="_blank" class="map-btn">View Location</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function createFireflies() {
+    const num = window.innerWidth < 600 ? 20 : 40; 
+    for(let i=0; i<num; i++) {
+      let firefly = document.createElement('div');
+      firefly.className = 'firefly';
+      firefly.style.left = Math.random() * 100 + 'vw';
+      firefly.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      firefly.style.animationDelay = (Math.random() * 5) + 's';
+      document.body.appendChild(firefly);
+    }
+  }
+
+  const startBtn = document.getElementById('start-btn');
+  const introScreen = document.getElementById('intro-screen');
+  const ripple = document.getElementById('ripple');
+  const mainContent = document.getElementById('main-content');
+  const audio = document.getElementById('bg-audio');
+  const musicBtn = document.getElementById('music-toggle');
+  let playing = false;
+
+  startBtn.addEventListener('click', () => {
+    ripple.style.transform = 'translate(-50%, -50%) scale(400)';
+    
+    setTimeout(() => {
+      introScreen.style.display = 'none';
+      document.body.classList.remove('locked');
+      ripple.style.opacity = '0';
+      mainContent.classList.add('show');
+      
+      createFireflies();
+      checkReveal();
+      
+      if(audio.src && audio.getAttribute('src') !== "") {
+        audio.play().then(() => {
+          playing = true;
+          musicBtn.innerHTML = '❚❚'; 
+          musicBtn.classList.add('spin');
+        }).catch(err => console.log(err));
+      }
+    }, 1000); 
+  });
+
+  musicBtn.addEventListener('click', () => {
+    if(!audio.src || audio.getAttribute('src') === ""){
+      musicBtn.innerHTML = '✕'; return; 
+    }
+    if(playing){ 
+      audio.pause(); musicBtn.innerHTML = '♪'; musicBtn.classList.remove('spin');
+    } else { 
+      audio.play(); musicBtn.innerHTML = '❚❚'; musicBtn.classList.add('spin');
+    }
+    playing = !playing;
+  });
+
+  function checkReveal() {
+    var reveals = document.querySelectorAll('.reveal');
+    for (var i = 0; i < reveals.length; i++) {
+      var windowHeight = window.innerHeight;
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      var elementVisible = 80; 
+      
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add('active');
+      }
+    }
+  }
+  window.addEventListener('scroll', checkReveal);
+</script>
+
+</body>
+</html>
