@@ -28,7 +28,7 @@
   body.locked { overflow: hidden; height: 100vh; }
 
   /* =========================================
-     EFEKTI I DYERVE (HAPJA MAGJIKE)
+     EFEKTI I DYERVE
   ========================================= */
   #intro-wrapper {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999;
@@ -78,7 +78,7 @@
   @keyframes fade { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
   /* =========================================
-     SFONDI DHE XIXAT E ARTA
+     SFONDI & XIXAT
   ========================================= */
   .main-bg {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -100,7 +100,7 @@
   }
 
   /* =========================================
-     TRUPI I FTESËS (FULL-PAGE FLOW)
+     TRUPI I FTESËS
   ========================================= */
   #content {
     opacity: 0; visibility: hidden; transition: opacity 1s ease 0.5s;
@@ -117,7 +117,7 @@
   .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .reveal.active { opacity: 1; transform: translateY(0); }
 
-  /* SEKSIONI 1: BALLINA */
+  /* BALLINA */
   .hero-quote {
     font-family: 'Cinzel', serif; font-size: 13px; font-weight: 300; line-height: 2;
     color: var(--white); text-transform: uppercase; letter-spacing: 4px;
@@ -151,7 +151,7 @@
     100% { transform: translate(-50%, 20px); opacity: 0; }
   }
 
-  /* SEKSIONI 2: KALENDARI & COUNTDOWN */
+  /* KALENDARI & COUNTDOWN */
   .section-title {
     font-family: 'Cinzel', serif; font-size: 26px; color: var(--gold);
     letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px;
@@ -161,7 +161,6 @@
     font-style: italic; margin-bottom: 40px; font-weight: 300;
   }
 
-  /* KALENDARI */
   .calendar-container {
     background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px);
     border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px;
@@ -184,7 +183,7 @@
     border-radius: 50%; box-shadow: 0 0 15px var(--gold-glow); transform: scale(1.2);
   }
 
-  /* COUNTDOWN STYLES */
+  /* COUNTDOWN */
   .countdown-wrapper {
     display: flex; gap: 15px; justify-content: center;
     width: 100%; max-width: 380px; margin: 0 auto;
@@ -203,7 +202,7 @@
     text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;
   }
 
-  /* SEKSIONI 3: AGJENDA & LOKACIONI */
+  /* AGJENDA */
   .agenda-wrapper {
     display: flex; flex-direction: column; gap: 40px; margin-bottom: 60px;
     width: 100%; max-width: 500px;
@@ -250,7 +249,7 @@
 
 <div class="main-bg"></div>
 
-<!-- EFEKTI I DYERVE DHE BUTONI -->
+<!-- EFEKTI I DYERVE -->
 <div id="intro-wrapper">
   <div class="door door-left" id="door-l"></div>
   <div class="door door-right" id="door-r"></div>
@@ -463,14 +462,33 @@
   }
   window.addEventListener('scroll', checkReveal);
 
-  // COUNTDOWN LOGIC
-  const countDownDate = new Date("Jul 24, 2026 19:00:00").getTime();
+  // COUNTDOWN LOGIC I PLOTE DHE I MBYLLUR
+  const targetDate = new Date("Jul 24, 2026 19:00:00").getTime();
 
-  const countdownTimer = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = countDownDate - now;
+  const timer = setInterval(function() {
+    const dNow = new Date().getTime();
+    const distance = targetDate - dNow;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floorNormally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+    if (distance < 0) {
+      clearInterval(timer);
+      document.getElementById("cd-days").innerHTML = "00";
+      document.getElementById("cd-hours").innerHTML = "00";
+      document.getElementById("cd-mins").innerHTML = "00";
+      document.getElementById("cd-secs").innerHTML = "00";
+      return;
+    }
+
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("cd-days").innerHTML = d < 10 ? "0" + d : d;
+    document.getElementById("cd-hours").innerHTML = h < 10 ? "0" + h : h;
+    document.getElementById("cd-mins").innerHTML = m < 10 ? "0" + m : m;
+    document.getElementById("cd-secs").innerHTML = s < 10 ? "0" + s : s;
+  }, 1000);
+</script>
+
+</body>
+</html>
