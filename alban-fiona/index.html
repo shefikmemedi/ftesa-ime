@@ -152,21 +152,21 @@
     100% { transform: translate(-50%, 20px); opacity: 0; }
   }
 
-  /* SEKSIONI 2: KALENDARI & DETAJET */
+  /* SEKSIONI 2: KALENDARI & COUNTDOWN */
   .section-title {
     font-family: 'Cinzel', serif; font-size: 26px; color: var(--gold);
     letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px;
   }
   .location-text {
     font-family: 'Playfair Display', serif; font-size: 22px; color: var(--white);
-    font-style: italic; margin-bottom: 60px; font-weight: 300;
+    font-style: italic; margin-bottom: 40px; font-weight: 300;
   }
 
   /* KALENDARI I BUKUR HTML/CSS */
   .calendar-container {
     background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px);
     border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px;
-    padding: 30px 20px; width: 100%; max-width: 380px; margin: 0 auto 50px auto;
+    padding: 30px 20px; width: 100%; max-width: 380px; margin: 0 auto 30px auto;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
   }
   .cal-month {
@@ -183,6 +183,25 @@
   .cal-day.highlight {
     background: var(--gold); color: var(--navy); font-weight: 700;
     border-radius: 50%; box-shadow: 0 0 15px var(--gold-glow); transform: scale(1.2);
+  }
+
+  /* COUNTDOWN STYLES */
+  .countdown-wrapper {
+    display: flex; gap: 15px; justify-content: center;
+    width: 100%; max-width: 380px; margin: 0 auto;
+  }
+  .cd-box {
+    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 10px;
+    padding: 15px 10px; flex: 1; text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .cd-number {
+    font-family: 'Cinzel', serif; font-size: 24px; color: var(--gold); font-weight: 600;
+  }
+  .cd-label {
+    font-family: 'Montserrat', sans-serif; font-size: 10px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;
   }
 
   /* SEKSIONI 3: AGJENDA & LOKACIONI */
@@ -271,7 +290,7 @@
     <div class="scroll-indicator"></div>
   </section>
 
-  <!-- SEKSIONI 2: Kalendari -->
+  <!-- SEKSIONI 2: Kalendari & Countdown -->
   <section>
     <div class="section-title reveal">24 Korrik 2026</div>
     <div class="location-text reveal">Restaurant "Oktagon" - Tenovë</div>
@@ -280,7 +299,6 @@
     <div class="calendar-container reveal">
       <div class="cal-month">Korrik 2026</div>
       <div class="cal-grid">
-        <!-- Ditët e javës -->
         <div class="cal-day-name">H</div>
         <div class="cal-day-name">M</div>
         <div class="cal-day-name">M</div>
@@ -289,7 +307,6 @@
         <div class="cal-day-name">S</div>
         <div class="cal-day-name">D</div>
         
-        <!-- Korrik 2026 fillon të Mërkurën, prandaj 2 ditë bosh -->
         <div class="cal-day empty"></div>
         <div class="cal-day empty"></div>
         <div class="cal-day">1</div>
@@ -315,7 +332,6 @@
         <div class="cal-day">21</div>
         <div class="cal-day">22</div>
         <div class="cal-day">23</div>
-        <!-- 24 Korrik -->
         <div class="cal-day highlight">24</div>
         <div class="cal-day">25</div>
         <div class="cal-day">26</div>
@@ -326,6 +342,27 @@
         <div class="cal-day">31</div>
       </div>
     </div>
+
+    <!-- COUNTDOWN / NUMËRUESI -->
+    <div class="countdown-wrapper reveal" style="transition-delay: 0.2s;">
+      <div class="cd-box">
+        <div class="cd-number" id="cd-days">00</div>
+        <div class="cd-label">Ditë</div>
+      </div>
+      <div class="cd-box">
+        <div class="cd-number" id="cd-hours">00</div>
+        <div class="cd-label">Orë</div>
+      </div>
+      <div class="cd-box">
+        <div class="cd-number" id="cd-mins">00</div>
+        <div class="cd-label">Minuta</div>
+      </div>
+      <div class="cd-box">
+        <div class="cd-number" id="cd-secs">00</div>
+        <div class="cd-label">Sekonda</div>
+      </div>
+    </div>
+
   </section>
 
   <!-- SEKSIONI 3: Programi dhe Mbyllja -->
@@ -343,7 +380,7 @@
       </div>
     </div>
 
-    <!-- Zëvendëso # me linkun e Google Maps -->
+    <!-- Linku i Hartës (i përditësuar nga ty) -->
     <div class="reveal">
       <a href="https://maps.app.goo.gl/xGykEi7nCna9NHmv5" target="_blank" class="map-btn">Shiko Hartën GPS</a>
     </div>
@@ -355,88 +392,18 @@
 </div>
 
 <script>
-  // Efekti i Xixave Fluturuese (Pluhuri i Artë)
-  function createParticles() {
-    const num = window.innerWidth < 600 ? 30 : 60; 
-    for(let i=0; i<num; i++) {
-      let particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + 'vw';
-      particle.style.animationDuration = (Math.random() * 6 + 4) + 's';
-      particle.style.animationDelay = (Math.random() * 5) + 's';
-      document.body.appendChild(particle);
-    }
-  }
+  // =========================================
+  // LOGJIKA E NUMËRUESIT (COUNTDOWN)
+  // =========================================
+  // Vendosim datën: 24 Korrik 2026, ora 19:00:00
+  const countDownDate = new Date("Jul 24, 2026 19:00:00").getTime();
 
-  const startBtnContainer = document.getElementById('start-btn-container');
-  const doorL = document.getElementById('door-l');
-  const doorR = document.getElementById('door-r');
-  const content = document.getElementById('content');
-  const audio = document.getElementById('bg-audio');
-  const musicBtn = document.getElementById('music-toggle');
-  let playing = false;
+  const countdownTimer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
 
-  startBtnContainer.addEventListener('click', () => {
-    // Fshihet butoni
-    startBtnContainer.style.opacity = '0';
-    startBtnContainer.style.transform = 'scale(0.8)';
-    
-    setTimeout(() => {
-      // Hapet perdja (dyert)
-      doorL.classList.add('open');
-      doorR.classList.add('open');
-      document.body.classList.remove('locked');
-      
-      // Shfaqet përmbajtja me fade-in
-      content.classList.add('show');
-      
-      createParticles();
-      checkReveal();
-      
-      // Muzika
-      if(audio.src && audio.getAttribute('src') !== "") {
-        audio.play().then(() => {
-          playing = true;
-          musicBtn.innerHTML = '❚❚'; 
-          musicBtn.classList.add('spin');
-        }).catch(err => console.log(err));
-      }
-      
-      // Hiq dyert nga DOM pas animacionit që të mos pengojnë klikimet
-      setTimeout(() => {
-        document.getElementById('intro-wrapper').style.display = 'none';
-      }, 1500);
-
-    }, 400); 
-  });
-
-  musicBtn.addEventListener('click', () => {
-    if(!audio.src || audio.getAttribute('src') === ""){
-      musicBtn.innerHTML = '✕'; return; 
-    }
-    if(playing){ 
-      audio.pause(); musicBtn.innerHTML = '♪'; musicBtn.classList.remove('spin');
-    } else { 
-      audio.play(); musicBtn.innerHTML = '❚❚'; musicBtn.classList.add('spin');
-    }
-    playing = !playing;
-  });
-
-  // Animacioni në Scroll (Për çdo seksion)
-  function checkReveal() {
-    var reveals = document.querySelectorAll('.reveal');
-    for (var i = 0; i < reveals.length; i++) {
-      var windowHeight = window.innerHeight;
-      var elementTop = reveals[i].getBoundingClientRect().top;
-      var elementVisible = 100; 
-      
-      if (elementTop < windowHeight - elementVisible) {
-        reveals[i].classList.add('active');
-      }
-    }
-  }
-  window.addEventListener('scroll', checkReveal);
-</script>
-
-</body>
-</html>
+    // Llogaritja për ditët, orët, minutat dhe sekondat
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
